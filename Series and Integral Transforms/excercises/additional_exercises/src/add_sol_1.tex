@@ -1,0 +1,270 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\newcommand{\easy}{\textcolor{green!60!black}{$\bigstar$}}
+\newcommand{\medium}{\textcolor{orange}{$\bigstar\bigstar$}}
+\newcommand{\hard}{\textcolor{red}{$\bigstar\bigstar\bigstar$}}
+
+\title{\textbf{Solutions: Additional Exercises 1}\\Positive Series}
+\author{Series and Integral Transforms}
+\date{}
+
+\begin{document}
+\maketitle
+
+% -------------------------------------------------------
+\section*{Exercise 1 — Finding Exact Sums}
+
+\subsection*{(a) \easy\ $\displaystyle\sum_{n=1}^{\infty}\left(\frac{3}{4}\right)^n$}
+
+This is a \textbf{geometric series} with first term $a = \tfrac{3}{4}$ and ratio $r = \tfrac{3}{4}$.
+Since $|r| < 1$, the series converges and
+\[
+  \sum_{n=1}^{\infty}\left(\frac{3}{4}\right)^n
+  = \frac{a}{1-r}
+  = \frac{\tfrac{3}{4}}{1 - \tfrac{3}{4}}
+  = \frac{\tfrac{3}{4}}{\tfrac{1}{4}} = \boxed{3}.
+\]
+
+\subsection*{(b) \easy\ $\displaystyle\sum_{n=0}^{\infty}\frac{2^n+3^n}{5^n}$}
+
+Split the series using linearity:
+\[
+  \sum_{n=0}^{\infty}\frac{2^n+3^n}{5^n}
+  = \sum_{n=0}^{\infty}\left(\frac{2}{5}\right)^n + \sum_{n=0}^{\infty}\left(\frac{3}{5}\right)^n.
+\]
+Both are geometric series (starting at $n=0$) with $|r|<1$:
+\[
+  = \frac{1}{1-\tfrac{2}{5}} + \frac{1}{1-\tfrac{3}{5}}
+  = \frac{5}{3} + \frac{5}{2}
+  = \frac{10}{6}+\frac{15}{6} = \boxed{\frac{25}{6}}.
+\]
+
+\subsection*{(c) \easy\ $\displaystyle\sum_{n=1}^{\infty}\frac{1}{n(n+1)}$}
+
+Use \textbf{partial fractions}: $\dfrac{1}{n(n+1)} = \dfrac{1}{n} - \dfrac{1}{n+1}$.
+
+The partial sum \textbf{telescopes}:
+\[
+  S_N = \sum_{n=1}^{N}\left(\frac{1}{n}-\frac{1}{n+1}\right)
+  = 1 - \frac{1}{N+1} \;\xrightarrow{N\to\infty}\; \boxed{1}.
+\]
+
+\subsection*{(d) \easy\ $\displaystyle\sum_{n=1}^{\infty}\frac{1}{n(n+2)}$}
+
+Partial fractions: $\dfrac{1}{n(n+2)} = \dfrac{1}{2}\!\left(\dfrac{1}{n}-\dfrac{1}{n+2}\right)$.
+
+Telescoping with step 2:
+\[
+  S_N = \frac{1}{2}\!\left(1 + \frac{1}{2} - \frac{1}{N+1} - \frac{1}{N+2}\right)
+  \;\xrightarrow{N\to\infty}\;
+  \frac{1}{2}\cdot\frac{3}{2} = \boxed{\frac{3}{4}}.
+\]
+
+\subsection*{(e) \medium\ $\displaystyle\sum_{n=1}^{\infty}\!\left[\sin\!\left(\frac{1}{n}\right)-\sin\!\left(\frac{1}{n+1}\right)\right]$}
+
+Define $b_n = \sin(1/n)$. The general term is $b_n - b_{n+1}$, which \textbf{telescopes}:
+\[
+  S_N = b_1 - b_{N+1} = \sin(1) - \sin\!\left(\frac{1}{N+1}\right)
+  \;\xrightarrow{N\to\infty}\;
+  \sin(1) - 0 = \boxed{\sin 1}.
+\]
+
+\subsection*{(f) \medium\ $\displaystyle\sum_{n=2}^{\infty}\ln\!\left(1-\frac{1}{n^2}\right)$}
+
+Factor the argument: $1 - \dfrac{1}{n^2} = \dfrac{(n-1)(n+1)}{n^2}$.  Using log rules:
+\[
+  \ln\!\left(\frac{(n-1)(n+1)}{n^2}\right)
+  = \ln(n-1) - \ln n + \ln(n+1) - \ln n.
+\]
+Write $a_n = \ln(n-1) - \ln n$ and $c_n = \ln(n+1) - \ln n$. Then:
+\[
+  S_N = \sum_{n=2}^{N} a_n + \sum_{n=2}^{N} c_n.
+\]
+The first sum telescopes to $\ln 1 - \ln N = -\ln N$.  The second telescopes to $\ln(N+1) - \ln 2$.  Hence
+\[
+  S_N = -\ln N + \ln(N+1) - \ln 2
+  = \ln\!\left(\frac{N+1}{N}\right) - \ln 2
+  \;\xrightarrow{N\to\infty}\; 0 - \ln 2 = \boxed{-\ln 2}.
+\]
+
+\subsection*{(g) \easy\ $\displaystyle\sum_{n=1}^{\infty}\frac{4^{n+1}}{5^n}$}
+
+Write $\dfrac{4^{n+1}}{5^n} = 4\cdot\left(\dfrac{4}{5}\right)^n$.  Geometric series:
+\[
+  4\sum_{n=1}^{\infty}\left(\frac{4}{5}\right)^n
+  = 4\cdot\frac{\tfrac{4}{5}}{1-\tfrac{4}{5}}
+  = 4\cdot\frac{\tfrac{4}{5}}{\tfrac{1}{5}} = 4\cdot 4 = \boxed{16}.
+\]
+
+\subsection*{(h) \medium\ $\displaystyle\sum_{n=0}^{\infty}\frac{1}{(3n+1)(3n+4)}$}
+
+Partial fractions: $\dfrac{1}{(3n+1)(3n+4)} = \dfrac{1}{3}\!\left(\dfrac{1}{3n+1}-\dfrac{1}{3n+4}\right)$.
+
+Telescoping (the terms pair up with step 3):
+\[
+  S_N = \frac{1}{3}\!\left(\frac{1}{1} - \frac{1}{3N+4}\right)
+  \;\xrightarrow{N\to\infty}\;
+  \frac{1}{3}\cdot 1 = \boxed{\frac{1}{3}\cdot\frac{1}{1}} .
+\]
+Wait — at $n=0$ the first term is $\frac{1}{3}(\frac{1}{1}-\frac{1}{4})$, at $n=1$ it is $\frac{1}{3}(\frac{1}{4}-\frac{1}{7})$, etc.  The telescope collapses to
+\[
+  S_N = \frac{1}{3}\left(1 - \frac{1}{3N+4}\right) \to \frac{1}{3}.
+\]
+\textbf{But} note the first factor at $n=0$ is $3(0)+1=1$ and $3(0)+4=4$, so indeed $S = \boxed{\dfrac{1}{3}}$.
+
+\smallskip
+\textit{Correction check:} At $n=0$: $1/(1\cdot4)=1/4$.  At $n=1$: $1/(4\cdot7)$.  The telescope gives $S=\frac{1}{3}(1/1)=1/3$.  $\checkmark$
+
+% -------------------------------------------------------
+\section*{Exercise 2 — Convergence Tests}
+
+\subsection*{(a) \easy\ $\displaystyle\sum\frac{1}{n^2+1}$}
+
+Since $\dfrac{1}{n^2+1} \leq \dfrac{1}{n^2}$ and $\sum\dfrac{1}{n^2}$ converges (\textbf{$p$-series}, $p=2>1$), by the \textbf{Comparison Test} the series \textbf{converges}.
+
+\subsection*{(b) \easy\ $\displaystyle\sum\frac{n}{2^n}$}
+
+\textbf{Ratio Test}: $\dfrac{a_{n+1}}{a_n} = \dfrac{n+1}{2^{n+1}}\cdot\dfrac{2^n}{n} = \dfrac{n+1}{2n}\to\dfrac{1}{2}<1$. \textbf{Converges}.
+
+\subsection*{(c) \easy\ $\displaystyle\sum\frac{n^2}{n!}$}
+
+\textbf{Ratio Test}: $\dfrac{(n+1)^2}{(n+1)!}\cdot\dfrac{n!}{n^2} = \dfrac{(n+1)^2}{(n+1)\,n^2} = \dfrac{n+1}{n^2}\to 0 < 1$. \textbf{Converges}.
+
+\subsection*{(d) \medium\ $\displaystyle\sum\frac{1}{n(\ln n)^2}$, $n\geq 2$}
+
+\textbf{Integral Test}: $f(x)=\dfrac{1}{x(\ln x)^2}$ is positive and decreasing.
+\[
+  \int_2^{\infty}\frac{dx}{x(\ln x)^2}
+  = \left[-\frac{1}{\ln x}\right]_2^{\infty} = \frac{1}{\ln 2} < \infty.
+\]
+\textbf{Converges}.
+
+\subsection*{(e) \easy\ $\displaystyle\sum\frac{2^{1/n}}{3^n}$}
+
+Since $2^{1/n}\to 1$, we have $\dfrac{2^{1/n}}{3^n}\sim\dfrac{1}{3^n}$ as $n\to\infty$.  By \textbf{Limit Comparison} with $\sum(1/3)^n$ (geometric, converges): $L = \lim \dfrac{2^{1/n}/3^n}{1/3^n} = 1$.  \textbf{Converges}.
+
+\subsection*{(f) \easy\ $\displaystyle\sum\frac{\arctan(1/n)}{n}$}
+
+Since $\arctan(1/n)\sim 1/n$ as $n\to\infty$, the terms behave like $1/n^2$.  \textbf{Limit Comparison} with $\sum 1/n^2$: $L=\lim n^2\cdot\arctan(1/n)/n = \lim n\arctan(1/n)=1$.  \textbf{Converges}.
+
+\subsection*{(g) \hard\ $\displaystyle\sum\frac{1\cdot3\cdot5\cdots(2n-1)}{(2n)!}$}
+
+\textbf{Ratio Test}:
+\[
+  \frac{a_{n+1}}{a_n}
+  = \frac{1\cdot3\cdots(2n-1)(2n+1)}{(2n+2)!}\cdot\frac{(2n)!}{1\cdot3\cdots(2n-1)}
+  = \frac{2n+1}{(2n+2)(2n+1)} = \frac{1}{2n+2}\to 0 < 1.
+\]
+\textbf{Converges}.
+
+\subsection*{(h) \medium\ $\displaystyle\sum\left(\frac{n}{3n-1}\right)^{2n-1}$}
+
+\textbf{Root Test}: $a_n^{1/n} = \left(\dfrac{n}{3n-1}\right)^{(2n-1)/n} \to \left(\dfrac{1}{3}\right)^2 = \dfrac{1}{9} < 1$. \textbf{Converges}.
+
+\subsection*{(i) \easy\ $\displaystyle\sum\left(\frac{n+1}{2n-1}\right)^n$}
+
+\textbf{Root Test}: $a_n^{1/n} = \dfrac{n+1}{2n-1}\to\dfrac{1}{2}<1$. \textbf{Converges}.
+
+\subsection*{(j) \medium\ $\displaystyle\sum\frac{n!}{1\cdot3\cdot5\cdots(2n-1)}$}
+
+\textbf{Ratio Test}:
+\[
+  \frac{a_{n+1}}{a_n} = \frac{(n+1)!}{1\cdot3\cdots(2n+1)}\cdot\frac{1\cdot3\cdots(2n-1)}{n!}
+  = \frac{n+1}{2n+1}\to\frac{1}{2}<1.
+\]
+\textbf{Converges}.
+
+\subsection*{(k) \hard\ $\displaystyle\sum\frac{(2n)!}{4^n(n!)^2}$}
+
+\textbf{Ratio Test}: $\dfrac{a_{n+1}}{a_n} = \dfrac{(2n+2)!}{4^{n+1}((n+1)!)^2}\cdot\dfrac{4^n(n!)^2}{(2n)!} = \dfrac{(2n+2)(2n+1)}{4(n+1)^2} = \dfrac{2n+1}{2(n+1)}\to 1$. \textit{Inconclusive.}
+
+By \textbf{Stirling's approximation}, $(2n)!\sim\sqrt{4\pi n}(2n/e)^{2n}$ and $n!\sim\sqrt{2\pi n}(n/e)^n$, giving:
+\[
+  \frac{(2n)!}{4^n(n!)^2}\sim\frac{1}{\sqrt{\pi n}}.
+\]
+Since $\sum 1/\sqrt{\pi n}$ diverges ($p$-series, $p=1/2\leq 1$), the original series \textbf{diverges} by Limit Comparison.
+
+% -------------------------------------------------------
+\section*{Exercise 3 — Theoretical Questions}
+
+\subsection*{(a) \easy\ Necessary condition}
+
+The \textbf{Necessary Condition for Convergence} states: if $\sum a_n$ converges, then $a_n\to 0$.
+
+\begin{itemize}
+  \item $\sum \dfrac{n^2}{n^2+1}$: here $a_n = \dfrac{n^2}{n^2+1}\to 1\neq 0$. \textbf{Diverges}.
+  \item $\sum (-1)^n$: here $a_n = (-1)^n$ does not converge to $0$. \textbf{Diverges}.
+\end{itemize}
+
+\subsection*{(b) \easy\ Absolute convergence and scalar multiples}
+
+Given $\sum a_n$ absolutely convergent and $c > 0$. Then $|ca_n| = c|a_n|$, so
+$\sum |ca_n| = c\sum |a_n| < \infty$. Hence $\sum ca_n$ is also absolutely convergent.
+
+\subsection*{(c) \medium\ Divergence of the sum when one part diverges}
+
+Suppose $\sum a_n$ converges and $\sum b_n$ diverges. We claim $\sum (a_n + b_n)$ diverges.
+
+\textit{Proof by contradiction}: assume $\sum(a_n+b_n)$ converges. Then by linearity of convergent series,
+$\sum b_n = \sum(a_n+b_n) - \sum a_n$ would also converge — a contradiction.
+Therefore $\sum(a_n+b_n)$ \textbf{diverges}. $\square$
+
+\subsection*{(d) \medium\ Bouncing ball}
+
+A ball is dropped from height $h = 4$ m, with bounce ratio $r = 2/3$.
+
+Total distance $= h + 2h r + 2h r^2 + \cdots = h + \dfrac{2hr}{1-r}$ (geometric, $|r|<1$):
+\[
+  = 4 + \frac{2\cdot4\cdot\tfrac{2}{3}}{1-\tfrac{2}{3}}
+  = 4 + \frac{\tfrac{16}{3}}{\tfrac{1}{3}}
+  = 4 + 16 = \boxed{20 \text{ m}}.
+\]
+
+\subsection*{(e) \medium\ $\displaystyle\sum_{n=0}^{\infty}\tan^n(x)$}
+
+This is a geometric series with ratio $r = \tan x$.  It converges if and only if $|\tan x| < 1$, i.e.,
+$x \in \left(-\dfrac{\pi}{4}+k\pi,\,\dfrac{\pi}{4}+k\pi\right)$, $k\in\mathbb{Z}$.
+When it converges, the sum is:
+\[
+  S = \frac{1}{1-\tan x}.
+\]
+
+% -------------------------------------------------------
+\section*{Exercise 4 — Integral Test Verification}
+
+\subsection*{(a) \easy\ $\displaystyle\sum_{n=2}^{\infty}\frac{1}{n\ln n}$}
+
+$f(x)=\dfrac{1}{x\ln x}$ is positive and decreasing on $[2,\infty)$.
+\[
+  \int_2^{\infty}\frac{dx}{x\ln x} = \Big[\ln(\ln x)\Big]_2^{\infty} = +\infty.
+\]
+By the \textbf{Integral Test}, the series \textbf{diverges}.
+
+\subsection*{(b) \easy\ $\displaystyle\sum_{n=1}^{\infty}\frac{1}{n^2+1}$}
+
+$f(x)=\dfrac{1}{x^2+1}$ is positive and decreasing.
+\[
+  \int_1^{\infty}\frac{dx}{x^2+1} = \Big[\arctan x\Big]_1^{\infty} = \frac{\pi}{2} - \frac{\pi}{4} = \frac{\pi}{4} < \infty.
+\]
+By the \textbf{Integral Test}, the series \textbf{converges}.
+
+\subsection*{(c) \medium\ $\displaystyle\sum_{n=1}^{\infty}n\,e^{-n^2}$}
+
+$f(x) = xe^{-x^2}$ is positive and decreasing on $[1,\infty)$.
+\[
+  \int_1^{\infty} x\,e^{-x^2}\,dx
+  = \left[-\frac{1}{2}e^{-x^2}\right]_1^{\infty}
+  = 0 + \frac{1}{2e} = \frac{1}{2e} < \infty.
+\]
+By the \textbf{Integral Test}, the series \textbf{converges}.
+
+\bigskip
+\hrule
+\bigskip
+\textit{Key takeaways}: Geometric series and telescoping are exact-sum workhorses.  The $p$-series criterion ($p>1$ converges), Ratio/Root tests handle factorial and exponential terms, and the Integral Test bridges series to calculus.
+
+\end{document}
