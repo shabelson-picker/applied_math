@@ -52,6 +52,21 @@ type: project
 
 ## Recent sessions
 
+### 2026-05-26
+- Working on SIT4 problem 4.7 (limits via Taylor series)
+- **4.7 ב** (lim d/dx [x^2 e^x / (1-cos x)]) — **answer: 2**
+  - Method: cancel x^2 from numerator and denominator first → f(x) = e^x / (series with nonzero constant)
+  - Expand numerator and denominator as power series, then f(x) = 2 + 2x + ... → f'(0) = a_1 = 2
+- **4.7 ג** (lim d^2/dx^2 [x^2 e^x / (1-cos x)]) — **in progress**, answer is 7/3
+  - Same function, need a_2: use 1/(1 - x^2/12) ≈ 1 + x^2/12 (geometric series, q = x^2/12)
+  - Student got wrong answer (24), needs to recheck x^2 coefficient multiplication
+- Key concepts discussed this session:
+  - Order of operations: simplify f(x) as a power series FIRST, then differentiate, then take limit at 0
+  - Why 1/Q(x) is analytic when Q(0) ≠ 0: write Q = Q(0)(1 - R), R(0)=0 → geometric series 1/(1-R) converges
+  - Analytic vs smooth (C^∞): analytic means Taylor series converges TO the function; smooth only means derivatives exist
+  - Classic non-analytic smooth example: e^(-1/x^2)
+  - Denominator of (1-cos x)/x^2 has only even powers → inverse also has only even powers → no odd-power mixing
+
 ### 2026-03-30
 - Covered formal proof of **Riemann's rearrangement theorem** (Part 2): conditionally convergent series can be rearranged to any sum L ∈ R.
 - Proof structure: split into positive/negative parts (both diverge) → greedy construction → overshoot/undershoot → 0 since a_n → 0.
