@@ -24,7 +24,7 @@ Watch for applying comparison test to alternating series.
 **Why:** Student tried to compare sums of alternating series using term ordering (larger term → larger sum). This only works for positive series.
 **How to apply:** Remind that comparison test requires positive terms.
 
-Drop LaTeX notation in chat — use plain text math instead (e.g. "2x / 3^x" not "$\frac{2x}{3^x}$").
+Drop LaTeX notation in chat — use plain text math instead (e.g. "2x / 3^x" not "$\frac{2x}{3^x}$"). This includes inline dollar signs, \frac, \sum, \int, etc.
 
 **Why:** LaTeX renders as raw markup in the chat and is unreadable.
 **How to apply:** Always write math in plain text in chat responses. LaTeX only in .tex files.

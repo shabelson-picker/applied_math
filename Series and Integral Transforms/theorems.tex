@@ -7,6 +7,14 @@
 
 \geometry{margin=2.5cm}
 
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
 \title{\textbf{Series and Integral Transforms}\\[0.5em]
 \large Theorems \& Formulas Reference Sheet}
 \author{Course 21183 --- HIT, Prof.\ Michael Kroyter}
@@ -82,8 +90,121 @@ Also: $R = \lim_{n\to\infty} \left|\dfrac{c_n}{c_{n+1}}\right|$ when the limit e
   \cos x &= \sum_{n=0}^\infty \frac{(-1)^n\, x^{2n}}{(2n)!}, \qquad R = \infty \\[6pt]
   \frac{1}{1-x} &= \sum_{n=0}^\infty x^n, \qquad |x| < 1 \\[6pt]
   \ln(1+x) &= \sum_{n=1}^\infty \frac{(-1)^{n+1}\, x^n}{n}, \qquad |x| \le 1,\ x \ne -1 \\[6pt]
+  \arctan x &= \sum_{n=0}^\infty \frac{(-1)^n\, x^{2n+1}}{2n+1}, \qquad |x| \le 1 \\[6pt]
   (1+x)^\alpha &= \sum_{n=0}^\infty \binom{\alpha}{n} x^n, \qquad |x| < 1
 \end{align*}
+
+\subsection{Taylor's Theorem with Remainder}
+
+\begin{theorem}[Taylor's Theorem --- Lagrange Remainder]
+If $f$ has $n+1$ continuous derivatives on an interval containing $a$, then
+\[
+  f(x) = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k + R_n(x),
+\]
+where the \textbf{Lagrange remainder} is
+\[
+  R_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}
+\]
+for some $c$ strictly between $a$ and $x$.
+\end{theorem}
+
+\textbf{Error bound:}
+\[
+  |R_n(x)| \leq \frac{M_{n+1}}{(n+1)!}\,|x-a|^{n+1},
+  \qquad M_{n+1} = \sup_{t \text{ between } a \text{ and } x}\bigl|f^{(n+1)}(t)\bigr|.
+\]
+
+\textbf{Workflow for ``how many terms'' questions:}
+Bound $|R_n(x)|$ using $M_{n+1}$, then solve $\frac{M_{n+1}}{(n+1)!}|x-a|^{n+1} < \varepsilon$ for the smallest $n$.
+
+\subsection{Computing Limits via Taylor Series}
+
+To evaluate $\lim_{x\to 0} g(x)$:
+\begin{enumerate}
+  \item Expand numerator and denominator as power series around 0.
+  \item Cancel common factors of $x^k$.
+  \item Read off the limit from the leading terms.
+\end{enumerate}
+For $\lim_{x\to 0} \frac{d^k}{dx^k}\bigl[f(x)\bigr]$: write $f(x) = \sum a_n x^n$, then $f^{(k)}(0) = k!\,a_k$.
+
+%----------------------------------------------------------------------
+\section{Uniform Convergence}
+
+\subsection{Sequences of Functions}
+
+\begin{definition}
+Let $f_n, f : D \to \mathbb{R}$.
+\begin{itemize}
+  \item \textbf{Pointwise convergence}: $f_n \to f$ if for each $x \in D$, $f_n(x) \to f(x)$.
+  \item \textbf{Uniform convergence} ($f_n \rightrightarrows f$):
+    \[
+      \sup_{x \in D}|f_n(x) - f(x)| \;\to\; 0.
+    \]
+\end{itemize}
+Uniform $\Rightarrow$ pointwise, but pointwise $\not\Rightarrow$ uniform in general.
+\end{definition}
+
+\textbf{Standard method:} Compute $M_n = \sup_{x\in D}|f_n(x)-f(x)|$ (find the max by differentiation or AM-GM). If $M_n \to 0$: uniform; if $M_n \not\to 0$: not uniform.
+
+\textbf{Negation:} $f_n \not\rightrightarrows f$ iff $\exists\,\varepsilon > 0$ and a sequence $x_n \in D$ with $|f_n(x_n) - f(x_n)| \geq \varepsilon$.
+A typical choice is $x_n = \arg\max_x |f_n(x) - f(x)|$.
+
+\begin{example}[$f_n(x) = x^n$ on $[0,1)$]
+Pointwise limit: $f(x) = 0$. But $\sup_{x\in[0,1)}|x^n - 0| = 1 \not\to 0$. Not uniform.
+On $[0,r]$ for any $r < 1$: $\sup = r^n \to 0$. Uniform.
+\end{example}
+
+\subsection{Properties Preserved by Uniform Convergence}
+
+\begin{theorem}[Continuity]
+If each $f_n$ is continuous on $D$ and $f_n \rightrightarrows f$, then $f$ is continuous on $D$.
+\end{theorem}
+
+\begin{theorem}[Term-by-term Integration]
+If $f_n \rightrightarrows f$ on $[a,b]$, then
+\[
+  \lim_{n\to\infty}\int_a^b f_n(x)\,dx = \int_a^b f(x)\,dx.
+\]
+\end{theorem}
+
+\begin{theorem}[Term-by-term Differentiation]
+If $f_n \to f$ pointwise on $[a,b]$, each $f_n$ is $C^1$, and $f_n' \rightrightarrows g$ uniformly, then $f$ is differentiable and $f' = g$.
+\end{theorem}
+
+\begin{remark}
+Counterexample for pointwise-only: $f_n(x) = n^2 x\,e^{-nx}$ on $[0,1]$ converges pointwise to $0$, but $\int_0^1 f_n\,dx = 1 \not\to 0$. The convergence is not uniform.
+\end{remark}
+
+\subsection{Series of Functions}
+
+A series $\displaystyle\sum_{n=1}^\infty u_n(x)$ \textbf{converges uniformly} on $D$ if its partial sums
+$S_N(x) = \sum_{n=1}^N u_n(x)$ converge uniformly on $D$.
+
+\begin{theorem}[Weierstrass $M$-Test]
+If $|u_n(x)| \leq M_n$ for all $x \in D$ and $\displaystyle\sum_{n=1}^\infty M_n < \infty$, then
+$\sum u_n(x)$ converges \emph{uniformly and absolutely} on $D$.
+\end{theorem}
+
+\begin{theorem}[Dirichlet's Test --- Uniform Version]
+$\sum a_n(x)\,b_n(x)$ converges uniformly on $D$ if:
+\begin{enumerate}
+  \item The partial sums $A_N(x) = \sum_{n=1}^N a_n(x)$ are \emph{uniformly bounded} on $D$.
+  \item $b_n(x) \searrow 0$ monotonically and \emph{uniformly} on $D$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Abel's Test --- Uniform Version]
+$\sum a_n(x)\,b_n(x)$ converges uniformly on $D$ if:
+\begin{enumerate}
+  \item $\sum a_n(x)$ converges \emph{uniformly} on $D$.
+  \item $b_n(x)$ is monotone and \emph{uniformly bounded} on $D$.
+\end{enumerate}
+\end{theorem}
+
+\textbf{Key fact about power series:} $\displaystyle\sum_{n=0}^\infty c_n x^n$ with radius of convergence $R$ converges
+uniformly on $[-r,r]$ for any $r < R$, but generally \emph{not} uniformly on the open interval $(-R,R)$.
+
+\textbf{Properties} (same as for sequences): if $\sum u_n$ converges uniformly and each $u_n$ is continuous, then the sum is continuous; term-by-term integration and differentiation are valid under uniform convergence (for differentiation: need $\sum u_n'$ to converge uniformly).
 
 %----------------------------------------------------------------------
 \section{Fourier Series}

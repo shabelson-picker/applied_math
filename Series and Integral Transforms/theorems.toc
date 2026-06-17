@@ -7,17 +7,23 @@
 \contentsline {subsection}{\numberline {2.1}Radius of Convergence}{3}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Taylor / Maclaurin Series}{3}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Common Maclaurin Series}{3}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Fourier Series}{3}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Definition}{3}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Dirichlet Conditions}{4}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Even and Odd Functions}{4}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Parseval's Identity}{4}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Complex Form}{4}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Fourier Transform}{4}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Definition}{4}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Key Properties}{4}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Parseval / Plancherel Theorem}{5}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Laplace Transform}{5}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Definition}{5}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Common Transforms}{5}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Convolution Theorem}{5}{subsection.5.3}%
+\contentsline {subsection}{\numberline {2.4}Taylor's Theorem with Remainder}{3}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Computing Limits via Taylor Series}{4}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Uniform Convergence}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Sequences of Functions}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Properties Preserved by Uniform Convergence}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Series of Functions}{5}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Fourier Series}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Definition}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Dirichlet Conditions}{6}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Even and Odd Functions}{6}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Parseval's Identity}{6}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Complex Form}{6}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Fourier Transform}{6}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Definition}{6}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Key Properties}{7}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Parseval / Plancherel Theorem}{7}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Laplace Transform}{7}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Definition}{7}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Common Transforms}{7}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Convolution Theorem}{7}{subsection.6.3}%

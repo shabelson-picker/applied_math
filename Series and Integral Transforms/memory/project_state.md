@@ -23,7 +23,7 @@ type: project
 11–12. Fourier transform, duality, convolution
 13. Plancherel, inverse Fourier transform
 
-## Files present (as of 2026-03-26)
+## Files present (as of 2026-06-12)
 
 ### Lectures
 - `חלק1.pdf` — Hebrew lecture notes, Part 1
@@ -48,6 +48,7 @@ type: project
 - `SIT2.pdf` — Exercise sheet 2: general series (alternating, absolute/conditional, ratio/root tests)
 - `SIT3.pdf` — Exercise sheet 3: power series (radius of convergence, Taylor/Maclaurin series)
 - `SIT4.pdf` — Exercise sheet 4: Taylor series applications + uniform convergence of sequences/series
+- `additional_exercises/add_ex_4_taylor_uniform.pdf` — Additional exercises for SIT4 topics
 - `Syllabus.pdf` — Course syllabus
 
 ## Recent sessions
