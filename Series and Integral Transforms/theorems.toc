@@ -1,29 +1,36 @@
-\contentsline {section}{\numberline {1}Numerical Series}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Basic Definitions}{2}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Convergence Tests}{2}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Absolute vs.\ Conditional Convergence}{2}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}$p$-Series}{2}{subsection.1.4}%
-\contentsline {section}{\numberline {2}Power Series}{3}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Radius of Convergence}{3}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Taylor / Maclaurin Series}{3}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Common Maclaurin Series}{3}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Taylor's Theorem with Remainder}{3}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Computing Limits via Taylor Series}{4}{subsection.2.5}%
-\contentsline {section}{\numberline {3}Uniform Convergence}{4}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Sequences of Functions}{4}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Properties Preserved by Uniform Convergence}{5}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Series of Functions}{5}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Fourier Series}{6}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Definition}{6}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Dirichlet Conditions}{6}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Even and Odd Functions}{6}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Parseval's Identity}{6}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Complex Form}{6}{subsection.4.5}%
-\contentsline {section}{\numberline {5}Fourier Transform}{6}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Definition}{6}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Key Properties}{7}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Parseval / Plancherel Theorem}{7}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Laplace Transform}{7}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Definition}{7}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Common Transforms}{7}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Convolution Theorem}{7}{subsection.6.3}%
+\contentsline {section}{\numberline {1}Numerical Series}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Basic Definitions and Facts}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Convergence Tests}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Power Series}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Radius of Convergence}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Taylor and Maclaurin Series}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Product and Quotient of Power Series}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Common Maclaurin Series}{5}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Taylor's Theorem with Remainder}{6}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Applications: Limits and Integrals via Taylor}{6}{subsection.2.6}%
+\contentsline {section}{\numberline {3}Uniform Convergence}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Sequences of Functions}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Properties Preserved by Uniform Convergence}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Series of Functions}{7}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Inner Product Spaces \& $L^2$ Norm}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Inner Product on $L^2[-L,L]$}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Orthogonality of the Trigonometric Basis}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Bessel's Inequality and Parseval's Identity}{8}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Fourier Series}{8}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Definition and Coefficients}{8}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Pointwise Convergence: Dirichlet's Theorem}{9}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Even, Odd, and Half-Period Extensions}{9}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Shift Property}{9}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Parseval's Identity and Computing Numerical Series}{9}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Complex Fourier Series}{10}{subsection.5.6}%
+\contentsline {subsection}{\numberline {5.7}Summing a Real Fourier Series in Closed Form}{10}{subsection.5.7}%
+\contentsline {subsection}{\numberline {5.8}Hyperbolic and Complex Functions (for Fourier)}{11}{subsection.5.8}%
+\contentsline {subsection}{\numberline {5.9}Technique: Complex Fourier of $e^{ax}$ on $[-L,L]$}{11}{subsection.5.9}%
+\contentsline {section}{\numberline {6}Fourier Transform}{12}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Definition and Inverse ($\omega $ convention)}{12}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Key Properties}{12}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Common Transform Pairs}{13}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Parseval / Plancherel Theorem}{13}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Laplace Transform}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Definition}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Common Transforms and Properties}{13}{subsection.7.2}%
