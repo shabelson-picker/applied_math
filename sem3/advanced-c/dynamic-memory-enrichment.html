@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>העשרה ותרגול · זיכרון דינאמי ו-sizeof</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d1321;
+    --panel:#161d2e;
+    --panel2:#1d2740;
+    --line:#2b3654;
+    --amber:#ffb454;
+    --cyan:#5cd6e8;
+    --green:#7ee081;
+    --red:#ff6b6b;
+    --text:#e8ecf6;
+    --muted:#93a0bd;
+    --code-bg:#0a0f1c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:'Heebo',sans-serif;
+    font-size:20px;
+    line-height:1.55;
+  }
+  code,pre,.mono{font-family:'JetBrains Mono',monospace;direction:ltr}
+
+  header{
+    padding:56px 6vw 40px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(1200px 400px at 85% -10%, rgba(255,180,84,.08), transparent 60%),
+      var(--ink);
+  }
+  .kicker{color:var(--amber);font-weight:600;letter-spacing:.12em;font-size:.85rem;margin-bottom:10px}
+  h1{font-size:clamp(2rem,4.2vw,3.2rem);font-weight:800;line-height:1.15}
+  h1 .lt{color:var(--cyan)}
+  header p{color:var(--muted);margin-top:12px;max-width:52ch}
+
+  nav{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;align-items:center}
+  nav .nav-group{color:var(--muted);font-size:.8rem;font-weight:600;margin-inline-start:8px}
+  nav .nav-group:first-child{margin-inline-start:0}
+  nav a{
+    color:var(--text);text-decoration:none;
+    border:1px solid var(--line);border-radius:999px;
+    padding:8px 18px;font-size:.9rem;background:var(--panel);
+    transition:border-color .15s, color .15s;
+  }
+  nav a:hover,nav a:focus-visible{border-color:var(--amber);color:var(--amber)}
+  nav a .t{color:var(--muted);font-size:.8rem;margin-inline-start:6px}
+
+  main{padding:0 6vw 90px;max-width:1150px;margin:0 auto}
+
+  /* מפריד בלוק-שעה */
+  .hour{
+    margin-top:80px;
+    display:flex;align-items:center;gap:18px;
+    scroll-margin-top:20px;
+  }
+  .hour > div{border-right:5px solid var(--amber);padding-right:20px}
+  .hour h2{font-size:1.9rem;font-weight:800;color:var(--amber)}
+  .hour .time{color:var(--cyan);font-weight:600;font-size:1rem}
+  .hour-sub{color:var(--muted);margin-top:10px;max-width:75ch}
+
+  section{margin-top:52px;scroll-margin-top:20px}
+  .sec-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+  h3.sec-title{font-size:1.45rem;font-weight:800}
+  .badge{
+    font-size:.8rem;font-weight:600;color:var(--ink);
+    background:var(--amber);border-radius:6px;padding:3px 12px;white-space:nowrap;
+  }
+  .badge.enrich{background:var(--cyan)}
+  .sec-sub{color:var(--muted);margin-bottom:22px;max-width:70ch}
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px 28px;
+    margin-bottom:22px;
+  }
+  .card h4{font-size:1.15rem;color:var(--amber);margin-bottom:12px;font-weight:600}
+
+  pre{
+    background:var(--code-bg);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px 22px;
+    overflow-x:auto;
+    font-size:1rem;
+    line-height:1.6;
+    text-align:left;
+  }
+  .k{color:#7aa2f7}
+  .fn{color:var(--amber)}
+  .s{color:#9ece6a}
+  .c{color:#565f89;font-style:italic}
+  .n{color:#ff9e64}
+
+  .reveal-btn{
+    margin-top:16px;
+    background:transparent;
+    color:var(--amber);
+    border:1px solid var(--amber);
+    border-radius:8px;
+    padding:10px 26px;
+    font-family:'Heebo',sans-serif;
+    font-size:1rem;font-weight:600;
+    cursor:pointer;
+    transition:background .15s,color .15s;
+  }
+  .reveal-btn:hover,.reveal-btn:focus-visible{background:var(--amber);color:var(--ink)}
+  .answer{display:none;margin-top:18px;border-top:1px dashed var(--line);padding-top:18px}
+  .answer.open{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ok{color:var(--green);font-weight:600}
+  .bad{color:var(--red);font-weight:600}
+  .cy{color:var(--cyan)}
+  .am{color:var(--amber)}
+
+  table.mem{
+    border-collapse:collapse;margin:14px 0;direction:ltr;font-family:'JetBrains Mono',monospace;
+    font-size:.95rem;
+  }
+  table.mem th,table.mem td{border:1px solid var(--line);padding:7px 18px;text-align:center}
+  table.mem th{background:var(--panel2);color:var(--muted);font-weight:400}
+  table.mem td.ch{color:var(--green);font-weight:700}
+
+  .quiz-item{border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-bottom:14px;background:var(--panel2)}
+  .quiz-q{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .quiz-q code{font-size:1.05rem;color:var(--text)}
+  .opts{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .opts button{
+    font-family:'JetBrains Mono',monospace;font-size:1rem;
+    background:var(--code-bg);color:var(--text);
+    border:1px solid var(--line);border-radius:8px;
+    padding:8px 22px;cursor:pointer;transition:all .15s;
+  }
+  .opts button:hover:not(:disabled){border-color:var(--cyan)}
+  .opts button.correct{background:rgba(126,224,129,.15);border-color:var(--green);color:var(--green)}
+  .opts button.wrong{background:rgba(255,107,107,.12);border-color:var(--red);color:var(--red)}
+  .opts button:disabled{cursor:default;opacity:.85}
+  .quiz-why{display:none;margin-top:12px;color:var(--muted);font-size:.95rem}
+  .quiz-why.show{display:block}
+  #quiz-score{margin-top:8px;font-weight:600;color:var(--amber)}
+
+  .memmap{display:flex;gap:30px;flex-wrap:wrap;align-items:stretch;margin-top:10px}
+  .memcol{flex:1;min-width:260px}
+  .memstack{border:1px solid var(--line);border-radius:12px;overflow:hidden;direction:ltr;font-family:'JetBrains Mono',monospace}
+  .memrow{padding:14px 18px;border-bottom:1px solid var(--line);text-align:center;font-size:.95rem}
+  .memrow:last-child{border-bottom:none}
+  .r-code{background:#22304f}
+  .r-data{background:#243b53}
+  .r-heap{background:rgba(255,180,84,.12);color:var(--amber);font-weight:700}
+  .r-free{background:transparent;color:var(--muted)}
+  .r-stack{background:rgba(92,214,232,.12);color:var(--cyan);font-weight:700}
+  .memnotes{flex:1.4;min-width:300px}
+  .memnotes ul{list-style:none}
+  .memnotes li{padding:8px 0;border-bottom:1px dashed var(--line)}
+  .memnotes li:last-child{border:none}
+  .memnotes b{color:var(--amber)}
+  .memnotes b.cy{color:var(--cyan)}
+
+  .hint{color:var(--muted);font-size:.9rem;margin-top:10px}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:820px){.two-col{grid-template-columns:1fr}}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:30px 6vw;color:var(--muted);font-size:.85rem;text-align:center;
+  }
+  @media print{
+    .answer{display:block!important}
+    .reveal-btn{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">סדנה מתקדמת בתכנות · פרק 1</div>
+  <h1>העשרה ותרגול<br><span class="lt">malloc · free · realloc · sizeof</span></h1>
+  <p>תרגול והעשרה לצד המצגת: בכל תחנה — קוד, שאלה, ותשובה שנחשפת בלחיצה.</p>
+  <nav>
+    <a href="#s1">מעקב מצביעים</a>
+    <a href="#s2">Stack מול Heap</a>
+    <a href="#s3">צָדים את הבאג</a>
+    <a href="#s4">הבאג של realloc</a>
+    <a href="#s5">למה פי 2?</a>
+    <a href="#s6">חידון sizeof</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============================================================ -->
+<!-- ====================== שעה ראשונה ========================== -->
+<!-- ============================================================ -->
+<div class="hour" id="h1">
+  <div>
+    <h2>מצביעים · malloc / calloc · כללי free</h2>
+    <div class="hour-sub">שקפים 1–23</div>
+  </div>
+</div>
+
+<!-- ===== תחנה 1 ===== -->
+<section id="s1">
+  <div class="sec-head"><h3 class="sec-title">תחנה 1 · מעקב מצביעים</h3><span class="badge">תרגול · אחרי שקף 7</span></div>
+  <p class="sec-sub">וריאציה על ההדגמה מהמצגת — הפעם עם השמת מצביע למצביע.</p>
+
+  <div class="card">
+    <h4>מה יודפס?</h4>
+<pre><span class="k">int</span> a = <span class="n">3</span>, b = <span class="n">8</span>, *p, *q;
+p = &a;
+q = &b;
+*p = *q + <span class="n">2</span>;
+p = q;
+*q = *p * <span class="n">2</span>;
+q = &a;
+<span class="fn">printf</span>(<span class="s">"a=%d b=%d *p=%d *q=%d\n"</span>, a, b, *p, *q);</pre>
+    <button class="reveal-btn" onclick="toggle(this)">חשיפת פתרון</button>
+    <div class="answer">
+      <p class="ok">‏a=10 b=16 *p=16 *q=10</p>
+      <table class="mem">
+        <tr><th>שורה</th><th>a</th><th>b</th><th>p ⟶</th><th>q ⟶</th></tr>
+        <tr><td class="mono">*p = *q + 2</td><td class="ch">10</td><td>8</td><td>a</td><td>b</td></tr>
+        <tr><td class="mono">p = q</td><td>10</td><td>8</td><td class="ch">b</td><td>b</td></tr>
+        <tr><td class="mono">*q = *p * 2</td><td>10</td><td class="ch">16</td><td>b</td><td>b</td></tr>
+        <tr><td class="mono">q = &a</td><td>10</td><td>16</td><td>b</td><td class="ch">a</td></tr>
+      </table>
+      <p class="hint">נקודת המפתח: אחרי <code class="cy">p = q</code> שני המצביעים מצביעים על אותו תא — שינוי דרך אחד נראה דרך השני.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== תחנה 2 ===== -->
+<section id="s2">
+  <div class="sec-head"><h3 class="sec-title">תחנה 2 · Stack מול Heap</h3><span class="badge enrich">העשרה · אחרי שקף 12</span></div>
+  <p class="sec-sub">איפה בעצם "גר" הזיכרון ש-malloc נותנת לנו? מפת הזיכרון של תהליך — התמונה שהופכת את כללי ה-free להגיוניים.</p>
+
+  <div class="card">
+    <div class="memmap">
+      <div class="memcol">
+        <div class="memstack">
+          <div class="memrow r-stack">Stack ⬇ · משתנים מקומיים, פרמטרים</div>
+          <div class="memrow r-free">↕ &nbsp;זיכרון פנוי&nbsp; ↕</div>
+          <div class="memrow r-heap">Heap ⬆ · malloc / calloc / realloc</div>
+          <div class="memrow r-data">Data · משתנים גלובליים וסטטיים</div>
+          <div class="memrow r-code">Code · קוד התוכנית</div>
+        </div>
+      </div>
+      <div class="memnotes">
+        <ul>
+          <li><b class="cy">Stack:</b> ניהול אוטומטי — משתנה נולד בכניסה לפונקציה ומת ביציאה ממנה. מהיר מאוד, אבל מוגבל בגודל (בד"כ ~1‎–8MB). לכן <code>int big[10000000];</code> מקומי יפיל את התוכנית (stack overflow).</li>
+          <li><b>Heap:</b> ניהול ידני — נולד ב-<code>malloc</code>, מת רק ב-<code>free</code>. גדול (מוגבל רק ב-RAM), ושורד מעבר בין פונקציות — זו הסיבה שאובייקט דינאמי שמוקצה בפונקציה נשאר בזיכרון אחרי היציאה ממנה (שקף 25).</li>
+          <li><b>למה free(a) על מערך סטטי קורס?</b> כי <code>a</code> בכלל לא ב-Heap — מנהל הזיכרון מחפש שם רשומת ניהול שלא קיימת.</li>
+          <li><b>למה free(ptr+1) קורס?</b> ‏malloc שומרת מטא-נתונים (גודל הבלוק) ממש <em>לפני</em> הכתובת שהיא מחזירה. ‏free חייבת לקבל בדיוק את אותה כתובת כדי למצוא אותם.</li>
+        </ul>
+      </div>
+    </div>
+    <button class="reveal-btn" onclick="toggle(this)">💡 סיפור מהעולם האמיתי</button>
+    <div class="answer">
+      <p>באגים בניהול זיכרון הם לא רק "נקודה בציון": מקובל להעריך שכ-70% מפרצות האבטחה החמורות שמיקרוסופט מתקנת מדי שנה נובעות מבאגי זיכרון בשפות כמו C. זו גם הסיבה שנולדו כלים כמו <span class="am mono" dir="ltr">Valgrind</span> ו-<span class="am mono" dir="ltr">AddressSanitizer</span> שמאתרים דליפות וגלישות בזמן ריצה — שווה להריץ על התרגילים שלכם.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== תחנה 3 ===== -->
+<section id="s3">
+  <div class="sec-head"><h3 class="sec-title">תחנה 3 · צָדים את הבאג</h3><span class="badge">תרגול · אחרי שקף 23</span></div>
+  <p class="sec-sub">בכל אחד משלושת הקטעים מסתתר באג אחד הקשור להקצאה או לשחרור זיכרון. מצאו אותו.</p>
+
+  <div class="two-col">
+    <div class="card">
+      <h4>קטע א'</h4>
+<pre><span class="k">int</span> *p = (<span class="k">int</span>*)<span class="fn">malloc</span>(<span class="n">10</span> * <span class="k">sizeof</span>(<span class="k">int</span>));
+<span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i <= <span class="n">10</span>; i++)
+    p[i] = i;
+<span class="fn">free</span>(p);</pre>
+      <button class="reveal-btn" onclick="toggle(this)">חשיפה</button>
+      <div class="answer">
+        <p><span class="bad">גלישה מהמערך:</span> הלולאה כותבת ל-<code>p[10]</code> — התא ה-11 במערך של 10. כמו בשקף 23: התוכנית אולי לא תיפול מיד, אבל <code>free</code> עלול לקרוס כי נדרסו נתוני הניהול של הבלוק.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>קטע ב'</h4>
+<pre><span class="k">int</span> *make_arr(<span class="k">int</span> n) {
+    <span class="k">int</span> a[<span class="n">100</span>];
+    <span class="k">for</span> (<span class="k">int</span> i = <span class="n">0</span>; i < n; i++)
+        a[i] = i * i;
+    <span class="k">return</span> a;
+}</pre>
+      <button class="reveal-btn" onclick="toggle(this)">חשיפה</button>
+      <div class="answer">
+        <p><span class="bad">החזרת כתובת של משתנה מקומי:</span> המערך <code>a</code> חי על ה-Stack (תחנה 2!) ונעלם ביציאה מהפונקציה. המצביע המוחזר מצביע לזיכרון שכבר לא שלנו (dangling pointer). התיקון: הקצאה עם <code class="am">malloc</code> — אובייקט דינאמי שורד יציאה מפונקציה (שקף 25).</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4>קטע ג'</h4>
+<pre><span class="k">int</span> *p = (<span class="k">int</span>*)<span class="fn">malloc</span>(<span class="n">5</span> * <span class="k">sizeof</span>(<span class="k">int</span>));
+p[<span class="n">0</span>] = <span class="n">7</span>;
+p = (<span class="k">int</span>*)<span class="fn">malloc</span>(<span class="n">20</span> * <span class="k">sizeof</span>(<span class="k">int</span>));
+<span class="c">/* ... */</span>
+<span class="fn">free</span>(p);</pre>
+      <button class="reveal-btn" onclick="toggle(this)">חשיפה</button>
+      <div class="answer">
+        <p><span class="bad">דליפת זיכרון (memory leak):</span> ההקצאה הראשונה של 5 שלמים אבדה — אף מצביע לא שומר את כתובתה, ואי אפשר לשחרר אותה יותר. התוכנית לא קורסת, אבל הזיכרון "נעלם" עד סוף הריצה.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- ====================== שעה שנייה =========================== -->
+<!-- ============================================================ -->
+<div class="hour" id="h2">
+  <div>
+    <h2>realloc · sizeof</h2>
+    <div class="hour-sub">שקפים 24–43</div>
+  </div>
+</div>
+
+<!-- ===== תחנה 4 ===== -->
+<section id="s4">
+  <div class="sec-head"><h3 class="sec-title">תחנה 4 · הבאג של realloc</h3><span class="badge">תרגול · אחרי שקף 30</span></div>
+  <p class="sec-sub">הבאג הכי נפוץ בשימוש ב-realloc — נמצא גם בקוד של מתכנתים מנוסים.</p>
+
+  <div class="card">
+    <h4>מה הבעיה?</h4>
+<pre>ptr = (<span class="k">int</span>*)<span class="fn">realloc</span>(ptr, size * <span class="k">sizeof</span>(<span class="k">int</span>));
+<span class="k">if</span> (ptr == <span class="k">NULL</span>)
+    <span class="fn">printf</span>(<span class="s">"Allocation failed\n"</span>);</pre>
+    <button class="reveal-btn" onclick="toggle(this)">חשיפה</button>
+    <div class="answer">
+      <p><span class="bad">דליפה במקרה כישלון:</span> אם <code>realloc</code> נכשלת היא מחזירה <code>NULL</code> — אבל הבלוק המקורי עדיין מוקצה ותקף! דריסת <code>ptr</code> ב-NULL מאבדת את הכתובת היחידה אליו. הדפוס הנכון:</p>
+<pre><span class="k">int</span> *temp = (<span class="k">int</span>*)<span class="fn">realloc</span>(ptr, size * <span class="k">sizeof</span>(<span class="k">int</span>));
+<span class="k">if</span> (temp) ptr = temp;
+<span class="k">else</span>      <span class="c">/* ptr עדיין תקף */</span> ;</pre>
+      <p class="hint">שימו לב: זה בדיוק מה שעושה הפונקציה <code>read_data</code> בשקף 35 עם המשתנה <code>temp</code> — עכשיו ברור למה הוא שם.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== תחנה 5 ===== -->
+<section id="s5">
+  <div class="sec-head"><h3 class="sec-title">תחנה 5 · למה דווקא פי 2?</h3><span class="badge enrich">העשרה · אחרי שקף 34</span></div>
+  <p class="sec-sub">המצגת מראה ש-2+4+8+16 < 31 העתקות מול 495 בהגדלה של תא-תא. בואו נכליל — ונגלה שכך בנויים גם ה-vector של ++C וה-list של Python.</p>
+
+  <div class="card">
+    <h4>שאלה: כמה העתקות בסך הכל עבור n איברים?</h4>
+    <p>אם מתחילים מ-2 ומכפילים פי 2 בכל פעם שהמקום נגמר — כמה העתקות של תאים יתבצעו בדרך להכנסת n איברים?</p>
+    <button class="reveal-btn" onclick="toggle(this)">חשיפה</button>
+    <div class="answer">
+      <p>סכום ההעתקות: <span class="mono" dir="ltr">2 + 4 + 8 + … + n/2 + n &lt; 2n</span> — כלומר <span class="ok">לכל היותר כ-2 העתקות בממוצע לכל איבר</span>, לא משנה כמה n גדול. זה נקרא <b class="am">עלות משוערכת</b> (amortized cost): פעולה בודדת יכולה להיות יקרה, אבל הממוצע לאורך זמן הוא O(1).</p>
+      <p style="margin-top:10px">בהגדלה של תא אחד בכל פעם, לעומת זאת: <span class="mono" dir="ltr">2+3+4+…+n ≈ n²/2</span> — ריבועי. עבור מיליון איברים: ‏~2 מיליון העתקות מול ‏~500 מיליארד.</p>
+      <p style="margin-top:10px" class="hint">בדיוק כך ממומשים <span class="mono" dir="ltr">std::vector</span> ב-++C (מקדם 2 או 1.5) ו-<span class="mono" dir="ltr">list</span> ב-Python (מקדם ~1.125) — הרעיון משקף 35 הוא הבסיס למבני הנתונים הדינאמיים בכל השפות המודרניות.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== תחנה 6 ===== -->
+<section id="s6">
+  <div class="sec-head"><h3 class="sec-title">תחנה 6 · חידון sizeof בזק</h3><span class="badge">תרגול · אחרי שקף 43</span></div>
+  <p class="sec-sub">שישה סיבובים מהירים. הנחה: מערכת 64-ביט טיפוסית (‎int‎ = 4, מצביע = 8).</p>
+
+  <div class="card" id="quiz">
+    <div class="quiz-item" data-correct="8">
+      <div class="quiz-q"><code>double d;  sizeof(d + 1)</code></div>
+      <div class="opts"></div>
+      <div class="quiz-why">הביטוי <code>d + 1</code> מקודם ל-double, לכן 8. ‏sizeof לא מריץ את הביטוי — רק בודק את הטיפוס שלו.</div>
+    </div>
+    <div class="quiz-item" data-correct="8">
+      <div class="quiz-q"><code>char *s = "hello";  sizeof(s)</code></div>
+      <div class="opts"></div>
+      <div class="quiz-why"><code>s</code> הוא מצביע — sizeof של מצביע (8 במערכת 64-ביט), לא אורך המחרוזת!</div>
+    </div>
+    <div class="quiz-item" data-correct="6">
+      <div class="quiz-q"><code>char s[] = "hello";  sizeof(s)</code></div>
+      <div class="opts"></div>
+      <div class="quiz-why">כאן <code>s</code> הוא מערך אמיתי: ‏5 תווים + ‏<code>'\0'</code> = ‏6. ההבדל בין מערך למצביע — בדיוק כמו בשקף 40.</div>
+    </div>
+    <div class="quiz-item" data-correct="4">
+      <div class="quiz-q"><code>sizeof('a' + 1)</code></div>
+      <div class="opts"></div>
+      <div class="quiz-why">‏<code>'a'</code> הוא int בשפת C (הערך 97), ולכן גם ‏<code>'a'+1</code> — התוצאה 4.</div>
+    </div>
+    <div class="quiz-item" data-correct="8">
+      <div class="quiz-q"><code>int a[10];  int *p = a;  sizeof(p)</code></div>
+      <div class="opts"></div>
+      <div class="quiz-why">שוב מצביע ולא מערך — ‏8. לעומת <code>sizeof(a)</code> שהיה מחזיר 40.</div>
+    </div>
+    <div class="quiz-item" data-correct="0">
+      <div class="quiz-q"><code>int i = 0;  sizeof(i++);  // מה ערך i אחרי?</code>&nbsp;<span style="color:var(--muted);font-size:.85rem">(כמה שווה i, לא sizeof)</span></div>
+      <div class="opts" data-opts="0,1,4"></div>
+      <div class="quiz-why"><span class="ok">‏i נשאר 0!</span> ‏sizeof הוא אופרטור בזמן קומפילציה — האופרנד לא מחושב בכלל, ולכן ה-++ לא מתבצע. הפתעה קלאסית בראיונות עבודה.</div>
+    </div>
+    <div id="quiz-score"></div>
+  </div>
+
+  <div class="card">
+    <h4>אתגר לסיום (או לבית)</h4>
+    <p>ממשו את התרגיל משקף 31 — מערך של 5 מספרים אקראיים שגדל ל-6 — בשתי גרסאות: אחת עם <code>realloc</code> ואחת עם <code>malloc</code> + העתקה ידנית + <code>free</code> של הישן. הדפיסו את הכתובת שהמערך מקבל בכל גרסה (<code dir="ltr">printf("%p", ptr)</code>) — האם ‏realloc תמיד מעבירה את הבלוק למקום חדש?</p>
+  </div>
+</section>
+
+</main>
+
+<footer>סדנה מתקדמת בתכנות · פרק 1: זיכרון דינאמי ואופרטור sizeof · חומר נלווה למצגת של לאוניד קוגל ומרק קורנבליט</footer>
+
+<script>
+function toggle(btn){
+  const ans = btn.nextElementSibling;
+  const open = ans.classList.toggle('open');
+  if(!btn.dataset.label) btn.dataset.label = btn.textContent;
+  btn.textContent = open ? 'הסתרה' : btn.dataset.label;
+}
+
+let score = 0, answered = 0;
+const items = document.querySelectorAll('#quiz .quiz-item');
+items.forEach(item=>{
+  const correct = item.dataset.correct;
+  const optsEl = item.querySelector('.opts');
+  const custom = optsEl.dataset.opts;
+  const options = custom ? custom.split(',') : ['1','2','4','8'];
+  options.forEach(v=>{
+    const b = document.createElement('button');
+    b.textContent = v;
+    b.onclick = ()=>{
+      if(item.dataset.done) return;
+      item.dataset.done = '1';
+      answered++;
+      optsEl.querySelectorAll('button').forEach(x=>{
+        x.disabled = true;
+        if(x.textContent === correct) x.classList.add('correct');
+      });
+      if(v === correct){ score++; } else { b.classList.add('wrong'); }
+      item.querySelector('.quiz-why').classList.add('show');
+      document.getElementById('quiz-score').textContent =
+        'ניקוד כיתתי: ' + score + ' / ' + answered;
+    };
+    optsEl.appendChild(b);
+  });
+});
+</script>
+</body>
+</html>
