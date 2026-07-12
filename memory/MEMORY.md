@@ -1,3 +1,4 @@
+- [AofA course](aofa-course.md) — self-paced Analysis of Algorithms course built around the Sedgewick-Flajolet book (sem3/data structure); module-per-chapter
 - [Infi 2 test prep](infi2-test-prep.md) — ongoing, working through solution PDFs question by question; up to List 11
 - [No LaTeX](no-latex-explanations.md) — explain math in plain text, never LaTeX
 - [Hebrew math terms](hebrew-math-terms-infi2.md) — glossary for the Infi 2 worksheets
