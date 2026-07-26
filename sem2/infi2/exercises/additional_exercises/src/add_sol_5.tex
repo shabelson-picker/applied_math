@@ -1,0 +1,154 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\geometry{margin=2.5cm}
+
+\newcommand{\easy}{{\color{green!60!black}$\bigstar$}}
+\newcommand{\medium}{{\color{orange}$\bigstar\bigstar$}}
+\newcommand{\hard}{{\color{red}$\bigstar\bigstar\bigstar$}}
+
+\title{\textbf{Solutions: Additional Exercises 5}\\
+\large Improper Integrals \& Topology of $\mathbb{R}^n$}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+%----------------------------------------------------------
+\section*{Exercise 1: Convergence or divergence}
+%----------------------------------------------------------
+
+\textbf{Reference:} $\int_1^\infty x^{-p}\,dx$ converges iff $p>1$; $\int_0^1 x^{-p}\,dx$ converges iff $p<1$.
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item $\int_1^\infty\frac{dx}{x^3+1}$. For large $x$: $\frac{1}{x^3+1}\sim\frac{1}{x^3}$. Since $p=3>1$, \textbf{converges} (limit comparison with $\int_1^\infty x^{-3}\,dx$).
+
+\item $\int_0^1 x^{-1/3}\,dx$. Singular at $0$, $p=1/3<1$. \textbf{Converges.} Value: $\left[\frac{x^{2/3}}{2/3}\right]_0^1=3/2$.
+
+\item $\int_1^\infty\frac{\ln x}{x^2}\,dx$. Integrate by parts: $u=\ln x$, $dv=x^{-2}dx$.
+$=-\frac{\ln x}{x}\Big|_1^\infty+\int_1^\infty\frac{1}{x^2}\,dx=0+\left[-\frac{1}{x}\right]_1^\infty=1$.
+\textbf{Converges; value $=1$.}
+
+\item $\int_0^1\frac{\sin x}{\sqrt{x}}\,dx$. Near $0$: $\sin x\sim x$, so $\frac{\sin x}{\sqrt{x}}\sim x^{1/2}$. Since $p=-1/2<1$ (equivalently the function is bounded and integrable), \textbf{converges.}
+
+\item $\int_0^\infty e^{-x}\,dx=\left[-e^{-x}\right]_0^\infty=1$. \textbf{Converges; value $=1$.}
+
+\item $\int_2^\infty\frac{dx}{x(\ln x)^2}$. Substitution $t=\ln x$, $dt=dx/x$:
+$\int_{\ln 2}^\infty t^{-2}\,dt=\left[-t^{-1}\right]_{\ln 2}^\infty=1/\ln 2$.
+\textbf{Converges; value $=1/\ln 2$.}
+
+\item $\int_1^\infty(\sqrt{x+1}-\sqrt{x-1})\,dx$. Rationalize:
+$\sqrt{x+1}-\sqrt{x-1}=\frac{2}{\sqrt{x+1}+\sqrt{x-1}}\sim\frac{2}{2\sqrt{x}}=\frac{1}{\sqrt{x}}$.
+Since $p=1/2<1$, $\int_1^\infty x^{-1/2}\,dx$ diverges. By limit comparison, \textbf{diverges.}
+
+\item $\int_0^1\frac{\ln(1+\sqrt[3]{x})}{e^{\sin x}-1}\,dx$. Near $0$: $\ln(1+\sqrt[3]{x})\sim x^{1/3}$ and $e^{\sin x}-1\sim\sin x\sim x$.
+So integrand $\sim x^{1/3}/x=x^{-2/3}$. Since $p=2/3<1$, \textbf{converges.}
+
+\item $\int_0^\infty\frac{\sin x}{x^{3/2}}\,dx$. Split at $x=1$:
+\begin{itemize}
+\item Near $0$: $\sin x/x^{3/2}\sim x/x^{3/2}=x^{-1/2}$, $p=1/2<1$, convergent.
+\item At $\infty$: $|\sin x/x^{3/2}|\le x^{-3/2}$, $p=3/2>1$, convergent absolutely.
+\end{itemize}
+\textbf{Converges.}
+
+\item $\int_0^1\frac{e^x-1}{\sin^2 x}\,dx$. Near $0$: $e^x-1\sim x$ and $\sin^2 x\sim x^2$, so ratio $\sim x^{-1}$. Since $p=1$, $\int_0^1 x^{-1}\,dx$ diverges. By limit comparison, \textbf{diverges.}
+
+\item $\int_1^\infty\frac{\arctan x}{x^2}\,dx$. Since $\arctan x\le\pi/2$, we have $\left|\frac{\arctan x}{x^2}\right|\le\frac{\pi/2}{x^2}$. $\int_1^\infty x^{-2}\,dx$ converges, so \textbf{converges} by comparison.
+
+\item $\int_1^\infty(\sqrt{x^2+1}-\sqrt{x^2-1})\,dx$. Rationalize:
+$\sqrt{x^2+1}-\sqrt{x^2-1}=\frac{2}{\sqrt{x^2+1}+\sqrt{x^2-1}}\sim\frac{2}{2x}=\frac{1}{x}$.
+Since $\int_1^\infty x^{-1}\,dx$ diverges, \textbf{diverges.}
+
+\item $\int_0^1\frac{x^{1/3}\ln x}{1-x^2}\,dx$. Near $0$: $1-x^2\to 1$, so integrand $\sim x^{1/3}\ln x\to 0$ (bounded); no issue at $0$.
+Near $1$: let $x=1-t$, $t\to 0^+$. $1-x^2=(1-x)(1+x)\sim 2t$, $x^{1/3}\to 1$, $\ln x\sim -(1-x)=-t$... wait $\ln(1-t)\sim -t$. So integrand $\sim\frac{1\cdot(-t)}{2t}=-1/2$. Bounded near $1$. \textbf{Converges.}
+
+\end{enumerate}
+
+%----------------------------------------------------------
+\section*{Exercise 2: Topology}
+%----------------------------------------------------------
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item $E=\{x^2+y^2<1\}$ (open disk). \textbf{Open, not closed.} Bounded. \textbf{Not compact} (not closed). Boundary: the circle $x^2+y^2=1$.
+
+\item $E=\{x^2+y^2\le 1\}$ (closed disk). \textbf{Closed, not open.} Bounded. \textbf{Compact.}
+
+\item $E=\{x^2+y^2=1\}$ (unit circle). \textbf{Closed, not open.} Bounded. \textbf{Compact.} Every point is a boundary point.
+
+\item $E=\{x^2+y^2+z^2\le 4\}$ (closed ball in $\mathbb{R}^3$). \textbf{Closed.} Bounded. \textbf{Compact.}
+
+\item $E=\{1<x^2+y^2\le 4\}$ (annulus, inner boundary excluded). \textbf{Neither open nor closed.} Bounded. \textbf{Not compact} (inner circle $x^2+y^2=1$ is limit of points in $E$ but not in $E$).
+
+\item $E=\{y>x^2\}$ (above parabola). \textbf{Open} (preimage of open set under continuous map). \textbf{Not closed} (e.g., $(0,0)$ is a limit point not in $E$). \textbf{Unbounded. Not compact.}
+
+\item $E=\{x>0, y>0, xy\le 1\}$. Contains its boundary (hyperbola $xy=1$ and parts of axes... actually $x>0,y>0$ excludes axes). \textbf{Not open} (boundary $xy=1$ is included). \textbf{Not closed} (sequences going to $x\to 0^+$). \textbf{Unbounded. Not compact.}
+
+\item $E=\{|x|+|y|\le 1\}$ (diamond/square rotated $45°$). \textbf{Closed.} Bounded. \textbf{Compact.}
+
+\item $E=\mathbb{Q}^2$. Every neighborhood of every rational point contains irrational points (exterior), so $\mathbb{Q}^2$ has no interior points. Also every real point is a limit of rationals, so the boundary is all of $\mathbb{R}^2$. $E$ is \textbf{neither open nor closed.} Unbounded. \textbf{Not compact.}
+
+\item $E=\{(x,y):y=\sin(1/x),x>0\}$ (graph of $\sin(1/x)$). Not open (1-dimensional curve). Is it closed? The closure includes the segment $\{x=0,-1\le y\le 1\}$ (as $x\to 0^+$, $\sin(1/x)$ oscillates). So $E$ is \textbf{not closed}. Unbounded. \textbf{Not compact.}
+
+\end{enumerate}
+
+%----------------------------------------------------------
+\section*{Exercise 3: Norms and inequalities}
+%----------------------------------------------------------
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item $\bar{x}=(3,-4,0)$: $\|\bar{x}\|_1=3+4+0=7$, $\|\bar{x}\|_2=\sqrt{9+16+0}=5$, $\|\bar{x}\|_\infty=\max(3,4,0)=4$.
+
+\item $\bar{x}=(1,2,-2,0)$: $\|\bar{x}\|_1=1+2+2+0=5$, $\|\bar{x}\|_2=\sqrt{1+4+4+0}=3$, $\|\bar{x}\|_\infty=2$.
+
+\item For $\bar{x}=(x_1,x_2)\in\mathbb{R}^2$:
+\begin{itemize}
+\item $\|\bar{x}\|_\infty=\max(|x_1|,|x_2|)\le\sqrt{x_1^2+x_2^2}=\|\bar{x}\|_2$: since $\max(|x_1|,|x_2|)^2\le x_1^2+x_2^2$.
+\item $\|\bar{x}\|_2=\sqrt{x_1^2+x_2^2}\le|x_1|+|x_2|=\|\bar{x}\|_1$: by $(|x_1|+|x_2|)^2=x_1^2+2|x_1||x_2|+x_2^2\ge x_1^2+x_2^2$.
+\end{itemize}
+
+\item $\bar{x}=(1,2,3)$, $\bar{y}=(4,-1,2)$.
+$\bar{x}\cdot\bar{y}=4-2+6=8$.
+$|\bar{x}|=\sqrt{14}$, $|\bar{y}|=\sqrt{21}$.
+C-S says $|\bar{x}\cdot\bar{y}|\le|\bar{x}||\bar{y}|$: $8\le\sqrt{14\cdot 21}=\sqrt{294}=7\sqrt{6}\approx 17.1$. $\checkmark$
+
+\item The set $\|\bar{x}\|_1\le 1$ in $\mathbb{R}^2$ is $\{|x_1|+|x_2|\le 1\}$, which is the square (diamond) with vertices $(\pm 1,0)$ and $(0,\pm 1)$. The unit disk $\|\bar{x}\|_2\le 1$ is inscribed in this diamond (touching at the vertices); the diamond contains the disk.
+
+\item \textbf{Proof of Cauchy--Schwarz:} For any $\lambda\in\mathbb{R}$,
+\[0\le\int_0^1(f(x)-\lambda g(x))^2\,dx=\int_0^1 f^2\,dx-2\lambda\int_0^1 fg\,dx+\lambda^2\int_0^1 g^2\,dx.\]
+This is a nonneg quadratic in $\lambda$, so its discriminant is $\le 0$:
+\[4\left(\int_0^1 fg\right)^2-4\left(\int_0^1 f^2\right)\left(\int_0^1 g^2\right)\le 0.\]
+Rearranging gives the Cauchy--Schwarz inequality. $\checkmark$
+
+\end{enumerate}
+
+%----------------------------------------------------------
+\section*{Exercise 4: Exact values}
+%----------------------------------------------------------
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item $\int_1^\infty x^{-2}\,dx=\left[-x^{-1}\right]_1^\infty=1$.
+
+\item $\int_0^1 x^{-1/2}\,dx=\left[2\sqrt{x}\right]_0^1=2$.
+
+\item $\int_1^\infty\frac{\ln x}{x^2}\,dx$. Integration by parts: $u=\ln x$, $dv=x^{-2}dx$, $du=dx/x$, $v=-x^{-1}$.
+$=\left[-\frac{\ln x}{x}\right]_1^\infty+\int_1^\infty\frac{dx}{x^2}=0+\left[-\frac{1}{x}\right]_1^\infty=1$.
+
+\item $\int_0^\infty xe^{-x}\,dx$. Integration by parts: $u=x$, $dv=e^{-x}dx$.
+$=\left[-xe^{-x}\right]_0^\infty+\int_0^\infty e^{-x}\,dx=0+1=1$.
+
+\item $\int_0^\infty\frac{dx}{(1+x^2)^2}$. Let $x=\tan\theta$, $dx=\sec^2\theta\,d\theta$, $1+x^2=\sec^2\theta$.
+$=\int_0^{\pi/2}\frac{\sec^2\theta}{\sec^4\theta}\,d\theta=\int_0^{\pi/2}\cos^2\theta\,d\theta=\int_0^{\pi/2}\frac{1+\cos 2\theta}{2}\,d\theta=\frac{\pi}{4}$.
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,322 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\usepackage{parskip}
+\geometry{top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm}
+
+\title{\bfseries Calculus 2 (20152-2)\\[6pt]
+\large Exercise Sheet 9 --- Full Solutions\\[4pt]
+\normalsize Line Integrals (Types I \& II),\ Green's Theorem,\ Conservative Fields}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+% =========================================================
+\section*{Problem 1 \quad Arc Length of the Astroid $x^{2/3}+y^{2/3}=1$}
+% =========================================================
+
+The curve is symmetric about both axes, so it suffices to compute the arc length
+in the first quadrant and multiply by 4.
+
+\textbf{Parametrisation (first quadrant):}
+\[
+  x(t)=\cos^3 t,\qquad y(t)=\sin^3 t,\qquad t\in\Bigl[0,\tfrac{\pi}{2}\Bigr].
+\]
+Verify: $x^{2/3}+y^{2/3}=\cos^2 t+\sin^2 t=1$.\quad\checkmark
+
+\[
+  \dot{x}=-3\cos^2 t\sin t,\qquad \dot{y}=3\sin^2 t\cos t.
+\]
+\[
+  ds=\sqrt{\dot{x}^2+\dot{y}^2}\,dt
+    =\sqrt{9\cos^4 t\sin^2 t+9\sin^4 t\cos^2 t}\,dt
+    =3\sqrt{\cos^2 t\sin^2 t}\,dt
+    =3\cos t\sin t\,dt.
+\]
+Arc length in the first quadrant:
+\[
+  L_1=\int_0^{\pi/2}3\cos t\sin t\,dt
+     =3\Bigl[\tfrac{\sin^2 t}{2}\Bigr]_0^{\pi/2}=\frac{3}{2}.
+\]
+\[
+  \boxed{L=4\cdot\tfrac{3}{2}=6.}
+\]
+
+% =========================================================
+\section*{Problem 2 \quad Type-I Line Integrals}
+% =========================================================
+
+\subsection*{(a) $\displaystyle\int_C xy^4\,ds$,\quad $C$: right half of $x^2+y^2=16$}
+
+Parametrise the right semicircle ($x\ge0$):
+\[
+  x=4\cos t,\quad y=4\sin t,\quad t\in\bigl[-\tfrac{\pi}{2},\tfrac{\pi}{2}\bigr],
+  \qquad ds=4\,dt.
+\]
+\begin{align*}
+  \int_C xy^4\,ds
+  &=\int_{-\pi/2}^{\pi/2}(4\cos t)(4\sin t)^4\cdot4\,dt
+   =4^6\int_{-\pi/2}^{\pi/2}\cos t\sin^4 t\,dt.
+\end{align*}
+The integrand is even, so
+\[
+  =2\cdot4096\int_0^{\pi/2}\cos t\sin^4 t\,dt
+   =8192\Bigl[\frac{\sin^5 t}{5}\Bigr]_0^{\pi/2}
+   =\frac{8192}{5}=\boxed{1638.4}
+\]
+
+\subsection*{(b) $\displaystyle\int_C xyz\,ds$,\quad
+  $C:\;x=2t,\;y=3\sin t,\;z=3\cos t,\;0\le t\le\tfrac{\pi}{2}$}
+
+\[
+  \dot{x}=2,\quad\dot{y}=3\cos t,\quad\dot{z}=-3\sin t,\qquad
+  ds=\sqrt{4+9\cos^2 t+9\sin^2 t}\,dt=\sqrt{13}\,dt.
+\]
+\begin{align*}
+  \int_C xyz\,ds
+  &=\sqrt{13}\int_0^{\pi/2}(2t)(3\sin t)(3\cos t)\,dt
+   =18\sqrt{13}\int_0^{\pi/2}t\sin t\cos t\,dt
+   =9\sqrt{13}\int_0^{\pi/2}t\sin 2t\,dt.
+\end{align*}
+Integrate by parts ($u=t$, $dv=\sin 2t\,dt$, $v=-\tfrac{\cos 2t}{2}$):
+\[
+  =9\sqrt{13}\left(\Bigl[-\tfrac{t\cos 2t}{2}\Bigr]_0^{\pi/2}
+    +\int_0^{\pi/2}\tfrac{\cos 2t}{2}\,dt\right)
+  =9\sqrt{13}\left(\frac{\pi}{4}+\Bigl[\frac{\sin 2t}{4}\Bigr]_0^{\pi/2}\right)
+  =9\sqrt{13}\cdot\frac{\pi}{4}.
+\]
+\[
+  \boxed{\int_C xyz\,ds=\frac{9\pi\sqrt{13}}{4}}
+\]
+
+\subsection*{(c) $\displaystyle\int_C xy\,ds$,\quad
+  $C$: straight segment from $(-1,1)$ to $(2,3)$}
+
+Parametrise: $x=-1+3t$, $y=1+2t$, $t\in[0,1]$; \quad $ds=\sqrt{9+4}\,dt=\sqrt{13}\,dt$.
+\begin{align*}
+  \int_C xy\,ds
+  &=\sqrt{13}\int_0^1(-1+3t)(1+2t)\,dt
+   =\sqrt{13}\int_0^1(-1+t+6t^2)\,dt\\
+  &=\sqrt{13}\Bigl[-t+\tfrac{t^2}{2}+2t^3\Bigr]_0^1
+   =\sqrt{13}\!\left(-1+\tfrac{1}{2}+2\right)
+   =\boxed{\dfrac{3\sqrt{13}}{2}}
+\end{align*}
+
+\subsection*{(d) $\displaystyle\int_C\dfrac{y}{\sqrt{x}}\,ds$,\quad
+  $C$: arc of $y^2=\tfrac{4}{9}x^3$ from $A(3,2\sqrt{3})$ to $B\!\bigl(8,\tfrac{32\sqrt{2}}{3}\bigr)$}
+
+Taking the positive branch: $y=\tfrac{2}{3}x^{3/2}$.
+\[
+  \frac{y}{\sqrt{x}}=\frac{\tfrac{2}{3}x^{3/2}}{\sqrt{x}}=\tfrac{2}{3}x,\qquad
+  y'=x^{1/2},\qquad
+  ds=\sqrt{1+x}\,dx.
+\]
+\[
+  \int_C\frac{y}{\sqrt{x}}\,ds=\int_3^8\tfrac{2}{3}x\sqrt{1+x}\,dx.
+\]
+Substitute $u=1+x$, limits $4\to9$:
+\begin{align*}
+  &=\tfrac{2}{3}\int_4^9(u-1)\sqrt{u}\,du
+   =\tfrac{2}{3}\int_4^9\!\bigl(u^{3/2}-u^{1/2}\bigr)du
+   =\tfrac{2}{3}\Bigl[\tfrac{2u^{5/2}}{5}-\tfrac{2u^{3/2}}{3}\Bigr]_4^9\\[4pt]
+  &=\tfrac{2}{3}\!\left[\!\left(\tfrac{486}{5}-18\right)-\!\left(\tfrac{64}{5}-\tfrac{16}{3}\right)\right]
+   =\tfrac{2}{3}\cdot\tfrac{1076}{15}
+   =\boxed{\dfrac{2152}{45}}
+\end{align*}
+
+% =========================================================
+\section*{Problem 3 \quad $\displaystyle\int_C\vec{F}\cdot d\vec{r}$}
+% =========================================================
+
+$\vec{F}(x,y)=e^x\,\hat{\imath}+xy\,\hat{\jmath}$,\quad
+$\vec{r}(t)=t^2\hat{\imath}+t^3\hat{\jmath}$,\quad $0\le t\le1$.
+
+\[
+  \vec{r}'(t)=2t\,\hat{\imath}+3t^2\hat{\jmath},\qquad
+  \vec{F}(\vec{r}(t))=e^{t^2}\hat{\imath}+t^5\hat{\jmath}.
+\]
+\[
+  \int_C\vec{F}\cdot d\vec{r}
+  =\int_0^1\!\bigl(2te^{t^2}+3t^7\bigr)dt
+  =\Bigl[e^{t^2}\Bigr]_0^1+\Bigl[\tfrac{3t^8}{8}\Bigr]_0^1
+  =(e-1)+\tfrac{3}{8}
+  =\boxed{\dfrac{8e-5}{8}}
+\]
+
+% =========================================================
+\section*{Problem 4 \quad Type-II Line Integrals}
+% =========================================================
+
+\subsection*{(a) $\displaystyle\int_C\sin x\,dx$,\quad
+  $C$: arc of $x=y^4$ from $A(1,-1)$ to $B(1,1)$}
+
+Since $P\,dx+Q\,dy=\sin x\,dx=d(-\cos x)$ is an exact differential, the integral depends only on the endpoints' $x$-coordinates.  Both $A$ and $B$ have $x=1$, so:
+\[
+  \int_C\sin x\,dx=\bigl[-\cos x\bigr]_{x=1}^{x=1}=\boxed{0}.
+\]
+
+\textit{Alternative check:}  Parametrise by $y\in[-1,1]$: $dx=4y^3\,dy$ and
+$\sin(y^4)\cdot4y^3$ is an odd function of $y$, giving zero over $[-1,1]$.
+
+\subsection*{(b) $\displaystyle\int_C xy\,dx+(x-y)\,dy$,\quad
+  $C$: $O(0,0)\to A(2,0)\to B(3,2)$}
+
+\textbf{Segment $OA$} ($y=0$, $x:0\to2$, $dy=0$):
+\[
+  \int_{OA}=\int_0^2 x\cdot0\,dx=0.
+\]
+
+\textbf{Segment $AB$}: parametrise $x=2+t$, $y=2t$, $t\in[0,1]$; $dx=dt$, $dy=2\,dt$.
+\begin{align*}
+  \int_{AB}
+  &=\int_0^1\!\bigl[(2+t)(2t)\cdot1+(2+t-2t)\cdot2\bigr]dt
+   =\int_0^1\!\bigl[4t+2t^2+4-2t\bigr]dt\\
+  &=\int_0^1\!\bigl[2t+2t^2+4\bigr]dt
+   =\Bigl[t^2+\tfrac{2t^3}{3}+4t\Bigr]_0^1
+   =1+\tfrac{2}{3}+4=\boxed{\dfrac{17}{3}}
+\end{align*}
+
+% =========================================================
+\section*{Problem 5 \quad Closed-Curve Type-II Integrals (Green's Theorem)}
+% =========================================================
+
+\subsection*{(a) $\displaystyle\oint_C y^2\,dx+x^2\,dy$,\quad
+  $C$: triangle $x=0,\;y=0,\;x+y=1$, CCW}
+
+Green's theorem with $P=y^2$, $Q=x^2$:
+\[
+  \oint_C=\iint_D\!\bigl(2x-2y\bigr)dA
+         =2\int_0^1\int_0^{1-x}(x-y)\,dy\,dx.
+\]
+\[
+  2\int_0^1\!\left[xy-\tfrac{y^2}{2}\right]_0^{1-x}\!dx
+  =2\int_0^1\!\left[x(1-x)-\tfrac{(1-x)^2}{2}\right]dx
+  =\int_0^1(1-x)(3x-1)\,dx
+\]
+\[
+  =\int_0^1(-3x^2+4x-1)\,dx=\Bigl[-x^3+2x^2-x\Bigr]_0^1=\boxed{0}
+\]
+
+\subsection*{(b) $\displaystyle\oint_C x^2y\,dx+xy^3\,dy$,\quad
+  $C$: unit square with vertices $(0,0),(1,0),(1,1),(0,1)$, CCW}
+
+Green's theorem with $P=x^2y$, $Q=xy^3$:
+\[
+  \oint_C=\iint_{[0,1]^2}\!\bigl(y^3-x^2\bigr)dA
+  =\int_0^1\!\int_0^1\!\bigl(y^3-x^2\bigr)dy\,dx
+  =\int_0^1\!\Bigl[\tfrac{y^4}{4}-x^2y\Bigr]_0^1\!dx
+  =\int_0^1\!\Bigl(\tfrac{1}{4}-x^2\Bigr)dx.
+\]
+\[
+  =\Bigl[\tfrac{x}{4}-\tfrac{x^3}{3}\Bigr]_0^1=\tfrac{1}{4}-\tfrac{1}{3}=\boxed{-\dfrac{1}{12}}
+\]
+
+\subsection*{(c) $\displaystyle\oint_C(x^2+y^2)\,dx+2xy\,dy$,\quad
+  $C$: arc of $y=x^2$ from $(0,0)$ to $(2,4)$, then $(2,4)\to(0,4)\to(0,0)$}
+
+With $P=x^2+y^2$ and $Q=2xy$:
+\[
+  \frac{\partial Q}{\partial x}=2y=\frac{\partial P}{\partial y}.
+\]
+The field is conservative (exact), so every closed-curve integral is zero:
+\[
+  \oint_C(x^2+y^2)\,dx+2xy\,dy=\boxed{0}.
+\]
+
+\subsection*{(d) $\displaystyle\oint_C xy^3\,dx+x^2y^2\,dy$,\quad
+  $C$: boundary of region bounded by $y=x^2$ and $y=\sqrt{x}$, CCW}
+
+Green's theorem with $P=xy^3$, $Q=x^2y^2$:
+\[
+  \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=2xy^2-3xy^2=-xy^2.
+\]
+Region $D$: $0\le x\le1$, $x^2\le y\le\sqrt{x}$.
+\begin{align*}
+  \oint_C
+  &=-\iint_D xy^2\,dA
+   =-\int_0^1 x\int_{x^2}^{\sqrt{x}}y^2\,dy\,dx
+   =-\int_0^1 x\cdot\frac{1}{3}\bigl(x^{3/2}-x^6\bigr)dx\\
+  &=-\frac{1}{3}\int_0^1\!\bigl(x^{5/2}-x^7\bigr)dx
+   =-\frac{1}{3}\Bigl[\frac{2x^{7/2}}{7}-\frac{x^8}{8}\Bigr]_0^1
+   =-\frac{1}{3}\!\left(\frac{2}{7}-\frac{1}{8}\right)
+   =-\frac{1}{3}\cdot\frac{9}{56}
+   =\boxed{-\dfrac{3}{56}}
+\end{align*}
+
+% =========================================================
+\section*{Problem 6 \quad Green's Theorem Applied Directly}
+% =========================================================
+
+Compute $\displaystyle\oint_C\!\bigl(y+e^{\sqrt{x}}\bigr)dx+\bigl(2x+\cos(y^2)\bigr)dy$,
+where $C$ is the boundary (CCW) of the region between $y=x^2$ and $x=y^2$.
+
+Let $P=y+e^{\sqrt{x}}$ and $Q=2x+\cos(y^2)$. Then:
+\[
+  \frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}=2-1=1.
+\]
+By Green's theorem, the integral equals the area of $D$:
+\[
+  \oint_C=\iint_D 1\,dA=\int_0^1\!\bigl(\sqrt{x}-x^2\bigr)dx
+         =\Bigl[\frac{2x^{3/2}}{3}-\frac{x^3}{3}\Bigr]_0^1
+         =\frac{2}{3}-\frac{1}{3}=\boxed{\dfrac{1}{3}}
+\]
+
+% =========================================================
+\section*{Problem 7 \quad Conservative Fields and Potential Functions}
+% =========================================================
+
+\subsection*{(a) $\vec{F}(x,y)=e^{2y}\,\hat{\imath}+\bigl(1+2xe^{2y}\bigr)\hat{\jmath}$}
+
+\textbf{Check conservativeness:}
+\[
+  \frac{\partial P}{\partial y}=2e^{2y}=\frac{\partial Q}{\partial x}.\qquad\checkmark
+\]
+
+\textbf{Find potential $f$ such that $\nabla f=\vec{F}$:}
+\[
+  f_x=e^{2y}\implies f=xe^{2y}+g(y).
+\]
+\[
+  f_y=2xe^{2y}+g'(y)=1+2xe^{2y}\implies g'(y)=1\implies g(y)=y.
+\]
+\[
+  f(x,y)=xe^{2y}+y.
+\]
+
+\textbf{Evaluate:} path $\vec{r}(t)=te^t\,\hat{\imath}+(1+t)\hat{\jmath}$, $0\le t\le1$:
+\[
+  \vec{r}(0)=(0,1),\qquad\vec{r}(1)=(e,2).
+\]
+\[
+  \int_C\vec{F}\cdot d\vec{r}=f(e,2)-f(0,1)=\bigl(e\cdot e^4+2\bigr)-\bigl(0+1\bigr)=\boxed{e^5+1}
+\]
+
+\subsection*{(b) $\vec{F}(x,y)=\bigl(1+4x^3y^3\bigr)\hat{\imath}+3x^4y^2\,\hat{\jmath}$}
+
+\textbf{Check conservativeness:}
+\[
+  \frac{\partial P}{\partial y}=12x^3y^2=\frac{\partial Q}{\partial x}.\qquad\checkmark
+\]
+
+\textbf{Find potential $f$:}
+\[
+  f_x=1+4x^3y^3\implies f=x+x^4y^3+g(y).
+\]
+\[
+  f_y=3x^4y^2+g'(y)=3x^4y^2\implies g'(y)=0\implies g=\text{const}.
+\]
+\[
+  f(x,y)=x+x^4y^3.
+\]
+
+\textbf{Evaluate:} path $\vec{r}(t)=te^t\,\hat{\imath}+(1+t)\hat{\jmath}$, $0\le t\le1$:
+\[
+  \vec{r}(0)=(0,1),\qquad\vec{r}(1)=(e,2).
+\]
+\[
+  \int_C\vec{F}\cdot d\vec{r}=f(e,2)-f(0,1)=\bigl(e+e^4\cdot8\bigr)-0=\boxed{e+8e^4}
+\]
+
+\end{document}

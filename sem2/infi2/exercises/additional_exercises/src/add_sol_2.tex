@@ -1,0 +1,182 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\geometry{margin=2.5cm}
+
+\newcommand{\easy}{{\color{green!60!black}$\bigstar$}}
+\newcommand{\medium}{{\color{orange}$\bigstar\bigstar$}}
+\newcommand{\hard}{{\color{red}$\bigstar\bigstar\bigstar$}}
+
+\title{\textbf{Solutions: Additional Exercises 2}\\
+\large Partial Derivatives \& Differentiability}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+%----------------------------------------------------------
+\section*{Exercise 1: First-order partial derivatives}
+%----------------------------------------------------------
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item $z=x^3+3x^2y-y^3$:\quad $z_x=3x^2+6xy$,\quad $z_y=3x^2-3y^2$.
+
+\item $z=\ln(x^2+y^2)$:\quad $z_x=\frac{2x}{x^2+y^2}$,\quad $z_y=\frac{2y}{x^2+y^2}$.
+
+\item $z=\arctan(y/x)$:\quad $z_x=\frac{1}{1+(y/x)^2}\cdot\left(-\frac{y}{x^2}\right)=\frac{-y}{x^2+y^2}$,\quad $z_y=\frac{x}{x^2+y^2}$.
+
+\item $z=\cos(ax-by)$:\quad $z_x=-a\sin(ax-by)$,\quad $z_y=b\sin(ax-by)$.
+
+\item $u=xe^{-yx}$:\quad $u_x=e^{-yx}+x(-y)e^{-yx}=e^{-yx}(1-xy)$,\quad $u_y=x\cdot(-x)e^{-yx}=-x^2 e^{-yx}$.
+
+\item $u=y/x+z/y+x/z$:\quad $u_x=-y/x^2+1/z$,\quad $u_y=1/x-z/y^2$,\quad $u_z=1/y-x/z^2$.
+
+\item $z=xy/(x-y)$:\quad $z_x=\frac{y(x-y)-xy}{(x-y)^2}=\frac{-y^2}{(x-y)^2}$,\quad $z_y=\frac{x(x-y)+xy}{(x-y)^2}=\frac{x^2}{(x-y)^2}$.
+
+\item $u=\arcsin(y/x)$:\quad $u_x=\frac{1}{\sqrt{1-(y/x)^2}}\cdot\left(-\frac{y}{x^2}\right)=\frac{-y}{x^2\sqrt{1-y^2/x^2}}=\frac{-y}{x\sqrt{x^2-y^2}}$,
+$u_y=\frac{1}{x\sqrt{1-y^2/x^2}}=\frac{1}{\sqrt{x^2-y^2}}$.
+
+\item $u=\sin^2(x+y)-\sin^2 x-\sin^2 y$. Using $\sin^2\alpha=\frac{1-\cos 2\alpha}{2}$:
+$u=\frac{1-\cos 2(x+y)}{2}-\frac{1-\cos 2x}{2}-\frac{1-\cos 2y}{2}=\frac{1-\cos(2x+2y)}{2}-\frac{1-\cos 2x}{2}-\frac{1-\cos 2y}{2}$.
+$u_x=-\sin(2x+2y)+\sin 2x=\sin 2x-\sin(2x+2y)$.
+Using sum-to-product: $u=\sin(x+y+x)\cdot\sin(-(y))$... alternatively:
+$u_x=2\sin(x+y)\cos(x+y)-2\sin x\cos x=\sin(2x+2y)-\sin 2x$.
+Wait, let's be careful: $\frac{d}{dx}\sin^2(x+y)=2\sin(x+y)\cos(x+y)\cdot 1=\sin(2x+2y)$.
+$\frac{d}{dx}\sin^2 x=2\sin x\cos x=\sin 2x$. $\frac{d}{dx}\sin^2 y=0$.
+So $u_x=\sin(2x+2y)-\sin 2x$.
+Similarly $u_y=\sin(2x+2y)-\sin 2y$.
+One can verify $u=\frac{1}{2}[\cos 2x+\cos 2y-\cos(2x+2y)-1]=-\frac{1}{2}\cos 2y\cdot 1$... Let's just leave as: $u_x=\sin(2x+2y)-\sin 2x$, $u_y=\sin(2x+2y)-\sin 2y$.
+
+\item $z=\ln(\sqrt[3]{1/x}-\sqrt[3]{1/y})=\ln(x^{-1/3}-y^{-1/3})$.
+$z_x=\frac{-\frac{1}{3}x^{-4/3}}{x^{-1/3}-y^{-1/3}}=\frac{-1}{3x^{4/3}(x^{-1/3}-y^{-1/3})}=\frac{-1}{3x(1-x^{1/3}y^{-1/3})}$ (multiply numerator/denominator by $x^{1/3}$)
+$=\frac{-1}{3(x-x^{2/3}y^{-1/3})\cdot ?}$\ldots Let $A=x^{-1/3}-y^{-1/3}$.
+$z_x=\frac{-\frac{1}{3}x^{-4/3}}{A}$, $z_y=\frac{\frac{1}{3}y^{-4/3}}{A}$.
+
+\end{enumerate}
+
+%----------------------------------------------------------
+\section*{Exercise 2: Partial derivatives at $(0,0)$ from definition}
+%----------------------------------------------------------
+
+\textbf{Method:} $f_x(0,0)=\lim_{\Delta x\to 0}\dfrac{f(\Delta x,0)-f(0,0)}{\Delta x}$.
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item $f(x,0)=\frac{x^3}{x^2}=x$ for $x\ne 0$, $f(0,0)=0$.
+$f_x(0,0)=\lim_{x\to 0}\frac{x-0}{x}=1$.
+By symmetry (swap $x$ and $y$): $f_y(0,0)=1$.
+
+\item $f(x,0)=\frac{0}{x^2}=0$, so $f_x(0,0)=\lim_{x\to 0}\frac{0}{x}=0$.
+Similarly $f(0,y)=0$, so $f_y(0,0)=0$.
+
+\item $f(x,0)=0$ for $x\ne 0$. $f_x(0,0)=\lim_{x\to 0}\frac{0}{x}=0$.
+Similarly $f_y(0,0)=0$.
+
+\item $f(x,0)$: at $y=0$ the formula gives $0+0=0$ (second branch when $y=0$).
+$f_x(0,0)=\lim_{x\to 0}\frac{f(x,0)-0}{x}=\lim_{x\to 0}\frac{0}{x}=0$.
+Similarly $f_y(0,0)=0$.
+
+\item $f(x,0)=0$. $f_x(0,0)=0$.
+$f(0,y)=0$. $f_y(0,0)=0$.
+So $f_x(0,0)=f_y(0,0)=0$.
+
+\end{enumerate}
+
+%----------------------------------------------------------
+\section*{Exercise 3: Verify identities}
+%----------------------------------------------------------
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item $z=\ln(\sqrt{x}+\sqrt{y})$:\quad $z_x=\frac{1/(2\sqrt{x})}{\sqrt{x}+\sqrt{y}}$,\quad $z_y=\frac{1/(2\sqrt{y})}{\sqrt{x}+\sqrt{y}}$.
+$xz_x+yz_y=\frac{x\cdot\frac{1}{2\sqrt{x}}+y\cdot\frac{1}{2\sqrt{y}}}{\sqrt{x}+\sqrt{y}}=\frac{\frac{\sqrt{x}}{2}+\frac{\sqrt{y}}{2}}{\sqrt{x}+\sqrt{y}}=\frac{\frac{\sqrt{x}+\sqrt{y}}{2}}{\sqrt{x}+\sqrt{y}}=\frac{1}{2}.\quad\checkmark$
+
+\item $u=e^{x/t^2}$:\quad $u_x=\frac{1}{t^2}e^{x/t^2}$,\quad $u_t=e^{x/t^2}\cdot\left(-\frac{2x}{t^3}\right)$.
+$2xu_x+tu_t=2x\cdot\frac{e^{x/t^2}}{t^2}+t\cdot\left(-\frac{2x}{t^3}\right)e^{x/t^2}=\frac{2x}{t^2}e^{x/t^2}-\frac{2x}{t^2}e^{x/t^2}=0.\quad\checkmark$
+
+\item $u=f(x^2+y^2+z^2)$. Let $r^2=x^2+y^2+z^2$. $u_x=f'(r^2)\cdot 2x$, $u_y=f'(r^2)\cdot 2y$.
+$yu_x-xu_y=y\cdot 2xf'(r^2)-x\cdot 2yf'(r^2)=0.\quad\checkmark$
+
+\item $u=\sqrt{x^2+y^2+z^2}$. $u_x=\frac{x}{u}$, $u_y=\frac{y}{u}$, $u_z=\frac{z}{u}$.
+$u_x^2+u_y^2+u_z^2=\frac{x^2+y^2+z^2}{u^2}=\frac{u^2}{u^2}=1.\quad\checkmark$
+
+\item $u=f(x/y, y/z)$. Let $s=x/y$, $t=y/z$.
+$u_x=f_s\cdot(1/y)$, $u_y=f_s\cdot(-x/y^2)+f_t\cdot(1/z)$, $u_z=f_t\cdot(-y/z^2)$.
+$xu_x+yu_y+zu_z=\frac{x}{y}f_s+y\left(-\frac{x}{y^2}f_s+\frac{1}{z}f_t\right)+z\left(-\frac{y}{z^2}f_t\right)=\frac{x}{y}f_s-\frac{x}{y}f_s+\frac{y}{z}f_t-\frac{y}{z}f_t=0.\quad\checkmark$
+
+\end{enumerate}
+
+%----------------------------------------------------------
+\section*{Exercise 4: Differentiability at $(0,0)$}
+%----------------------------------------------------------
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item From Ex.~2(a): $f_x(0,0)=f_y(0,0)=1$.
+Test: $\frac{\Delta f-\Delta x-\Delta y}{|\Delta\rho|}$ where $\Delta\rho=\sqrt{(\Delta x)^2+(\Delta y)^2}$.
+With $\Delta x=r\cos\theta$, $\Delta y=r\sin\theta$:
+$\Delta f=r(\cos^3\theta+\sin^3\theta)$ (from polar calculation), linear part $=r\cos\theta+r\sin\theta$.
+Remainder: $r(\cos^3\theta+\sin^3\theta-\cos\theta-\sin\theta)=r(-\cos\theta\sin^2\theta-\sin\theta\cos^2\theta)=-r\sin\theta\cos\theta(\cos\theta+\sin\theta)$.
+Divide by $r$: $-\sin\theta\cos\theta(\cos\theta+\sin\theta)$, which does \emph{not} go to $0$ (depends on $\theta$).
+\textbf{Not differentiable at $(0,0)$.}
+
+\item From definition: $f(x,0)=x^2\cos(\pi/x^2)$ for $x\ne 0$.
+$f_x(0,0)=\lim_{x\to 0}\frac{x^2\cos(\pi/x^2)}{x}=\lim_{x\to 0}x\cos(\pi/x^2)=0$ (squeeze).
+Similarly $f_y(0,0)=0$.
+Differentiability test: $\frac{f(r\cos\theta,r\sin\theta)-0}{r}=\frac{r^2\cos(\pi/r^2)}{r}=r\cos(\pi/r^2)\to 0$ as $r\to 0$.
+\textbf{Differentiable at $(0,0)$.}
+
+\item[(c)] \textbf{(a)} $f_x(0,0)=\lim_{x\to 0}\frac{\sqrt[3]{x\cdot 0}-0}{x}=0$. Similarly $f_y(0,0)=0$.
+
+\textbf{(b)} Away from axes: $f_x=\frac{1}{3}(xy)^{-2/3}\cdot y=\frac{y^{1/3}}{3x^{2/3}}$. As $(x,y)\to(0,0)$ along $y=x$: $f_x=\frac{x^{1/3}}{3x^{2/3}}=\frac{1}{3x^{1/3}}\to\infty$. So $f_x$ is \emph{not} continuous at $(0,0)$.
+
+\textbf{(c)} Differentiability: $\frac{f(r\cos\theta,r\sin\theta)}{r}=\frac{(r^2\cos\theta\sin\theta)^{1/3}}{r}=\frac{r^{2/3}(\cos\theta\sin\theta)^{1/3}}{r}=\frac{(\cos\theta\sin\theta)^{1/3}}{r^{1/3}}\to\infty$ when $\cos\theta\sin\theta\ne 0$. \textbf{Not differentiable at $(0,0)$.}
+
+\item[(d)] $f(x,0)=0$, so $f_x(0,0)=0$. Similarly $f_y(0,0)=0$.
+Away from origin: $f_x=\frac{2xy(x^2+y^2)-x^2y\cdot 2x}{(x^2+y^2)^2}=\frac{2xy^3}{(x^2+y^2)^2}$.
+Along $y=x$: $f_x=\frac{2x^4}{4x^4}=\frac{1}{2}\not\to 0=f_x(0,0)$. So $f_x$ \emph{not} continuous.
+But differentiability: $\frac{f(r\cos\theta,r\sin\theta)}{r}=\frac{r^3\cos^2\theta\sin\theta}{r^2\cdot r}=\cos^2\theta\sin\theta$, which depends on $\theta$.
+\textbf{Not differentiable at $(0,0)$.}
+
+\end{enumerate}
+
+%----------------------------------------------------------
+\section*{Exercise 5: Tangent planes and normal lines}
+%----------------------------------------------------------
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item $f=x^2+y^2$, $f_x=2x$, $f_y=2y$. At $(1,1)$: $f_x=2$, $f_y=2$, $f=2$.
+Tangent plane: $z-2=2(x-1)+2(y-1)$, i.e.\ $z=2x+2y-2$.
+Normal direction: $(f_x,f_y,-1)=(2,2,-1)$. Normal line: $\frac{x-1}{2}=\frac{y-1}{2}=\frac{z-2}{-1}$.
+
+\item $f=e^x\sin y$, $f_x=e^x\sin y$, $f_y=e^x\cos y$.
+At $(0,\pi/2)$: $f=1$, $f_x=\sin(\pi/2)=1$, $f_y=\cos(\pi/2)=0$.
+Tangent plane: $z-1=1\cdot(x-0)+0\cdot(y-\pi/2)$, i.e.\ $z=x+1$.
+
+\item $f=\ln(x^2+y^2)$. At $(1,0)$: $f=0$, $f_x=2x/(x^2+y^2)|_{(1,0)}=2$, $f_y=0$.
+Tangent plane: $z=2(x-1)$, i.e.\ $z=2x-2$.
+
+\item $f=\sqrt{x^2+y^2}$. At $(3,4)$: $f=5$, $f_x=3/5$, $f_y=4/5$.
+Tangent plane: $z-5=\frac{3}{5}(x-3)+\frac{4}{5}(y-4)$, i.e.\ $z=\frac{3}{5}x+\frac{4}{5}y$.
+
+\item $F(x,y,z)=x^2+y^2+z^2-14$. $\nabla F=(2x,2y,2z)$. At $(1,2,3)$: $\nabla F=(2,4,6)$.
+Tangent plane: $2(x-1)+4(y-2)+6(z-3)=0$, i.e.\ $x+2y+3z=14$.
+Normal line: $(x,y,z)=(1,2,3)+t(2,4,6)$.
+
+\item $f=x^2-xy+y^2+1$. $f_x=2x-y$, $f_y=-x+2y$.
+Plane $2x+4y-z=5$ has normal $(2,4,-1)$. Tangent plane normal is $(f_x,f_y,-1)$.
+For parallel planes, need $f_x/2=f_y/4=(-1)/(-1)=1$, so $f_x=2$, $f_y=4$.
+$2x-y=2$ and $-x+2y=4$. From first: $y=2x-2$. Substitute: $-x+2(2x-2)=4\Rightarrow 3x=8\Rightarrow x=8/3$, $y=10/3$.
+Point on surface: $z=f(8/3,10/3)=64/9-80/9+100/9+1=84/9+1=93/9+9/9=\frac{102}{9}=\frac{34}{3}$.
+\textbf{Point: $\left(\frac{8}{3},\frac{10}{3},\frac{34}{3}\right)$.}
+
+\end{enumerate}
+
+\end{document}

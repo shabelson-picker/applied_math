@@ -1,0 +1,170 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\geometry{margin=2.5cm}
+
+\newcommand{\easy}{{\color{green!60!black}$\bigstar$}}
+\newcommand{\medium}{{\color{orange}$\bigstar\bigstar$}}
+\newcommand{\hard}{{\color{red}$\bigstar\bigstar\bigstar$}}
+
+\title{\textbf{Solutions: Additional Exercises 1}\\
+\large Limits \& Continuity of Multivariable Functions}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+%----------------------------------------------------------
+\section*{Exercise 1: Domains}
+%----------------------------------------------------------
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item $f(x,y)=\ln(x^2-y)$. Need $x^2-y>0$, i.e.\ $y<x^2$.
+\textbf{Domain:} the open region below the parabola $y=x^2$.
+
+\item $f(x,y)=\sqrt{9-x^2-y^2}$. Need $9-x^2-y^2\ge 0$, i.e.\ $x^2+y^2\le 9$.
+\textbf{Domain:} the closed disk of radius $3$ centered at the origin.
+
+\item $f(x,y)=\arcsin\!\left(\frac{x+y}{x-y}\right)$. Need $-1\le\frac{x+y}{x-y}\le 1$ and $x\ne y$.
+From $\frac{x+y}{x-y}\le 1$: $x+y\le x-y$ (when $x>y$), giving $y\le 0$.
+From $\frac{x+y}{x-y}\ge -1$: $x+y\ge -(x-y)=y-x$, giving $x\ge 0$.
+\textbf{Domain:} $\{(x,y): x\ge 0,\; y\le 0,\; x\ne y\}$ (third quadrant boundary plus positive $x$-axis, excluding $x=y$, which is only $x=y=0$ in this region so we must also check).
+More carefully: the region is $x\ge 0$, $y\le 0$ with $x\ne y$. Since $y\le 0\le x$ we have $x\ge y$ so $x-y\ge 0$, and $x=y$ only at origin which is a boundary case. Domain: $x\ge 0,\;y\le 0$.
+
+\item $f(x,y)=\ln\!\left(\frac{x^2+y^2}{x^2-y^2}\right)$. Need $\frac{x^2+y^2}{x^2-y^2}>0$.
+Since $x^2+y^2\ge 0$ (and $=0$ only at origin), we need $x^2-y^2>0$, i.e.\ $|x|>|y|$.
+Also need $x^2+y^2\ne 0$, so not the origin.
+\textbf{Domain:} $\{(x,y)\ne(0,0): |x|>|y|\}$ (the two open sectors between the lines $y=\pm x$).
+
+\item $f(x,y)=\sqrt{\ln(x^2+y^2-1)}$. Need $\ln(x^2+y^2-1)\ge 0$, i.e.\ $x^2+y^2-1\ge 1$,
+so $x^2+y^2\ge 2$. Also need $x^2+y^2-1>0$, which is implied.
+\textbf{Domain:} $\{(x,y): x^2+y^2\ge 2\}$ (exterior of circle of radius $\sqrt{2}$, including the circle).
+
+\end{enumerate}
+
+%----------------------------------------------------------
+\section*{Exercise 2: Level Curves}
+%----------------------------------------------------------
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item $f(x,y)=x^2-y^2=c$. Level curves are hyperbolas $x^2-y^2=c$.
+For $c>0$: hyperbola opening left-right. For $c<0$: hyperbola opening up-down. For $c=0$: the lines $y=\pm x$.
+
+\item $f(x,y)=y/x=c$. Level curves are lines $y=cx$ through the origin (excluding origin). Each slope $c$ gives one line; $c=0$ is the $x$-axis (excluding origin).
+
+\item $f(x,y)=x^2+4y^2=c$ (need $c>0$). These are ellipses with semi-axes $\sqrt{c}$ along $x$ and $\sqrt{c}/2$ along $y$. At $c=4$: semi-axes $2$ and $1$. At $c=16$: semi-axes $4$ and $2$.
+
+\item $f(x,y)=\ln(x^2+y^2)=c$ means $x^2+y^2=e^c>0$. Level curves are concentric circles of radius $e^{c/2}$. At $c=0$: unit circle. At $c=2$: circle of radius $e$. At $c=-2$: circle of radius $e^{-1}$.
+
+\end{enumerate}
+
+%----------------------------------------------------------
+\section*{Exercise 3: Limits}
+%----------------------------------------------------------
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item Let $t=x^2+y^2\to 0^+$. Then $\displaystyle\lim_{t\to 0^+}\frac{\sin t}{t}=1$.
+\textbf{Answer: $1$.} (Standard limit.)
+
+\item Use polar coordinates $x=r\cos\theta$, $y=r\sin\theta$, $r\to 0^+$:
+$\frac{2r^2\cos^2\theta+3r^4\sin^4\theta}{r^2}=2\cos^2\theta+3r^2\sin^4\theta\to 2\cos^2\theta$.
+This depends on $\theta$, so the \textbf{limit does not exist}.
+
+\item Since $|\cos(1/xy)|\le 1$, we have $|(x^2+y^2)\cos(1/xy)|\le x^2+y^2\to 0$.
+By the squeeze theorem, \textbf{limit $= 0$}.
+
+\item Try paths: Along $x=0$: $f(0,y)=0$. Along $y=x^2$:
+$f(x,x^2)=\frac{x^3\cdot x^2}{x^4+x^4}=\frac{x^5}{2x^4}=\frac{x}{2}\to 0$.
+Hmm, both give $0$. Try $y=t x^2$ general: $f(x,tx^2)=\frac{x^3\cdot tx^2}{x^4+t^2x^4}=\frac{tx}{1+t^2}\to 0$.
+All paths give $0$. Actually let's check more carefully via polar: $\frac{r^3\cos^3\theta\cdot r\sin\theta}{r^4\cos^4\theta+r^2\sin^2\theta}=\frac{r^4\cos^3\theta\sin\theta}{r^4\cos^4\theta+r^2\sin^2\theta}$.
+If $\sin\theta\ne 0$, denominator $\sim r^2\sin^2\theta$ as $r\to 0$, so ratio $\sim\frac{r^4\cos^3\theta\sin\theta}{r^2\sin^2\theta}=\frac{r^2\cos^3\theta}{\sin\theta}\to 0$.
+If $\sin\theta=0$ (axes), numerator $=0$.
+
+Actually, there IS a path where the limit is nonzero. Let $y=x^2$: computed above gives $x/2\to 0$. Let me try $y = x^{4/3}\cdot m$... Actually we need to check the original hint that DNE via path $y=x^2$. But I computed $f(x,x^2)=\frac{x^5}{2x^4}=x/2\to 0$. So via that path limit is $0$.
+
+The original note says this is DNE (path $y=x^2$ gives $1/2$), but that was for a different function. Let's recompute: $\frac{x^3 y}{x^4+y^2}$ at $y=x^2$: $\frac{x^3\cdot x^2}{x^4+x^4}=\frac{x^5}{2x^4}=\frac{x}{2}\to 0$. Not $1/2$.
+
+Path $y=mx^2$: $\frac{x^3\cdot mx^2}{x^4+m^2x^4}=\frac{mx^5}{x^4(1+m^2)}=\frac{mx}{1+m^2}\to 0$. All such paths give $0$.
+
+Polar: As computed, limit is $0$ as well. \textbf{Answer: limit $= 0$.}
+
+\emph{(This problem's limit exists and equals $0$; the ``DNE'' comment in the problem statement referred to a similar but different function.)}
+
+\item Rationalize: multiply by $\frac{\sqrt{x^2+y^2+1}+1}{\sqrt{x^2+y^2+1}+1}$:
+\[\frac{(x^2+y^2)(\sqrt{x^2+y^2+1}+1)}{x^2+y^2}=\sqrt{x^2+y^2+1}+1\to\sqrt{1}+1=2.\]
+\textbf{Answer: $2$.}
+
+\item Write $t=x^2+y^4$. If $t\to 0$ implies $(x,y)\to (0,0)$: $\frac{\sin t}{x^2+y^2}$.
+Note $x^2+y^2\ge 0$ and $x^2\le x^2+y^4$ but we need to relate $t=x^2+y^4$ to $x^2+y^2$.
+Near $(0,0)$: $y^4\le y^2$ so $x^2+y^4\le x^2+y^2$. Also $x^2+y^2\le$ something.
+But $\frac{\sin(x^2+y^4)}{x^2+y^2}\approx\frac{x^2+y^4}{x^2+y^2}$ as $(x,y)\to(0,0)$.
+Along $y=0$: $\frac{x^2}{x^2}=1$. Along $x=0$: $\frac{y^4}{y^2}=y^2\to 0$.
+Two paths give different limits, so \textbf{limit does not exist}.
+
+\item $\left(1+\frac{1}{x}\right)^{x+y}=\left(1+\frac{1}{x}\right)^x\cdot\left(1+\frac{1}{x}\right)^y$.
+As $x\to\infty$: $\left(1+\frac{1}{x}\right)^x\to e$ and $\left(1+\frac{1}{x}\right)^y\to 1^3=1$ (for fixed $y\to 3$).
+\textbf{Answer: $e$.}
+
+\item As $(x,y)\to(0,0)$ with $xy\ne 0$: $\frac{\sin(xy)}{xy}\to 1$, but $\sin\!\left(\frac{1}{\sqrt{x^2+y^2}}\right)$ oscillates.
+Take $x=t$, $y=t$ with $t\to 0^+$: $\frac{\sin(t^2)}{t^2}\cdot\sin\!\left(\frac{1}{t\sqrt{2}}\right)$.
+The first factor $\to 1$, while the second oscillates between $-1$ and $1$.
+\textbf{The limit does not exist.}
+
+\item Polar coordinates: $\frac{r^5\cos^5\theta-r^5\cos^2\theta\sin^3\theta}{r^4\cos^4\theta+r^4\sin^4\theta}=\frac{r\cos^2\theta(\cos^3\theta-\sin^3\theta)}{\cos^4\theta+\sin^4\theta}\to 0$.
+(The denominator $\cos^4\theta+\sin^4\theta\ge 1/2$, and the numerator has factor $r\to 0$.)
+\textbf{Answer: $0$.}
+
+\item $\cos(x^2+y^2)\approx 1-\frac{(x^2+y^2)^2}{2}$ near origin, so $1-\cos(x^2+y^2)\approx\frac{(x^2+y^2)^2}{2}$.
+Thus $\frac{x^5-\cos(x^2+y^2)+1}{(x^2+y^2)^2}\approx\frac{x^5}{(x^2+y^2)^2}+\frac{1}{2}$.
+The term $\frac{x^5}{(x^2+y^2)^2}$: in polar, $\frac{r^5\cos^5\theta}{r^4}=r\cos^5\theta\to 0$.
+\textbf{Answer: $\frac{1}{2}$.}
+
+\end{enumerate}
+
+%----------------------------------------------------------
+\section*{Exercise 4: Continuity}
+%----------------------------------------------------------
+
+\begin{enumerate}[leftmargin=*, label=(\alph*)]
+
+\item Polar: $\frac{r^2\cos^2\theta+2r^2\sin^2\theta}{r^2}=\cos^2\theta+2\sin^2\theta=1+\sin^2\theta$.
+This depends on $\theta$, so $\lim_{(x,y)\to(0,0)}f\ne 1=f(0,0)$. \textbf{Not continuous at $(0,0)$. Domain of continuity: $\mathbb{R}^2\setminus\{(0,0)\}$.}
+
+\item Polar: $\frac{r^4\cos^2\theta\sin^2\theta}{r^2}=r^2\cos^2\theta\sin^2\theta\to 0=f(0,0)$. \textbf{Continuous on all $\mathbb{R}^2$.}
+
+\item $\left|\frac{\sqrt[3]{y}\,\sin(x^2)}{x^2+y^2}\right|\le\frac{|y|^{1/3}\cdot x^2}{x^2+y^2}\le|y|^{1/3}\to 0=f(0,0)$
+(used $x^2/(x^2+y^2)\le 1$). \textbf{Continuous on all $\mathbb{R}^2$.}
+
+\item $|(x+y)\sin(1/x^2)\cos(1/y)|\le|x+y|\le|x|+|y|\to 0=f(0,0)$. \textbf{Continuous on all $\mathbb{R}^2$.}
+
+\item Polar: $\frac{r^3\cos^3\theta+r^3\sin^3\theta}{r^2}=r(\cos^3\theta+\sin^3\theta)\to 0=f(0,0)$.
+(Bounded: $|\cos^3\theta+\sin^3\theta|\le 2$.) \textbf{Continuous on all $\mathbb{R}^2$.}
+
+\item Polar numerator: $r^4\cos^4\theta\cdot r^2\sin^2\theta=r^6\cos^4\theta\sin^2\theta$.
+Denominator: $r^4\cos^4\theta+r^2\sin^2\theta=r^2(r^2\cos^4\theta+\sin^2\theta)$.
+Ratio: $\frac{r^4\cos^4\theta\sin^2\theta}{r^2\cos^4\theta+\sin^2\theta}$.
+If $\sin\theta\ne 0$: denom $\to\sin^2\theta$, so ratio $\to\frac{r^4\cos^4\theta\sin^2\theta}{\sin^2\theta}\to 0$.
+If $\sin\theta=0$: ratio $=0$.
+So limit $=0=f(0,0)$. \textbf{Continuous on all $\mathbb{R}^2$.}
+
+\item Use polar: numerator $x^4-x^3y-xy^3+y^4=(x-y)(x^3-y^3)=(x-y)^2(x^2+xy+y^2)$ (after factoring).
+In polar: $(r\cos\theta-r\sin\theta)^2(r^2\cos^2\theta+r^2\cos\theta\sin\theta+r^2\sin^2\theta)=r^2(\cos\theta-\sin\theta)^2\cdot r^2(1+\cos\theta\sin\theta)$.
+Denominator: $\sqrt{r^6\cos^6\theta+r^6\sin^6\theta}=r^3\sqrt{\cos^6\theta+\sin^6\theta}$.
+Ratio: $\frac{r^4(\cos\theta-\sin\theta)^2(1+\cos\theta\sin\theta)}{r^3\sqrt{\cos^6\theta+\sin^6\theta}}=r\cdot\frac{(\cos\theta-\sin\theta)^2(1+\cos\theta\sin\theta)}{\sqrt{\cos^6\theta+\sin^6\theta}}$.
+The fraction is bounded (denom $\ge 1/\sqrt{2}$, numerator bounded). So ratio $\to 0=f(0,0)$.
+\textbf{Continuous on all $\mathbb{R}^2$.}
+
+\item $\lim_{(x,y)\to(0,0)}(x^2+y^2)\sin\!\frac{1}{x^2+y^2}$: polar: $r^2\sin(1/r^2)\to 0$ (since $|\sin|\le 1$).
+But $f(0,0)=1\ne 0$. \textbf{Not continuous at $(0,0)$. Domain of continuity: $\mathbb{R}^2\setminus\{(0,0)\}$.}
+
+\end{enumerate}
+
+\end{document}
