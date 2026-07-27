@@ -1,0 +1,47 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "all"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Build class_work2 from class_work2.c + utils.c (with -g)."
+        },
+        {
+            "label": "make clean",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "clean"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "detail": "Remove object files and the binary."
+        },
+        {
+            "label": "make rebuild",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "make clean",
+                "make"
+            ],
+            "problemMatcher": [],
+            "detail": "Clean then build."
+        }
+    ]
+}

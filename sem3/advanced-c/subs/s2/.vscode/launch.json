@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug class_work2 (gdb)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/class_work2",
+            // main() switches on argv[i][0], so without an argument it does
+            // nothing and exits. Pass "1", "2" or "3" to run q1/q2/q3.
+            "args": [
+                "1"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            // integratedTerminal so printf output and any stdin input work normally.
+            "console": "integratedTerminal",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "make"
+        }
+    ]
+}
