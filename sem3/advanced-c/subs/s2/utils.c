@@ -78,4 +78,17 @@ int populte_monotonic_arr_with_dups(int *arr, int size)
     }
     return none_dups;
 }
+void populte_monotonic_arr_no_dups(int *arr, int size)
+{
+    // returns number of none dups
 
+    int min_delta = 1,delta = 0;
+    
+    arr[0] = 1;
+    for (int i = 1; i < size; i++)
+    {
+        delta = rand() % DELTA_MAX + min_delta;
+        arr[i] = arr[i - 1] + delta;
+    }
+    
+}

@@ -70,10 +70,11 @@ void q3()
             printf("FILTER ARGS: Max Price: %i, Rooms %i\n", prices[i], rooms[j]);
             filtered = apartment_filter_apts(N, all_flats, prices[i], rooms[j], &filtered_size);
             print_apart_array(filtered, filtered_size);
+            free(filtered);
             printf("----------");
         }
     }
-    free(filtered);
+   
 }
 
 int main(int argc, char **argv)

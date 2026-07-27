@@ -39,5 +39,6 @@ void random_populate_char_array(char *arr, int size);
 /* fills arr with a non-decreasing sequence containing duplicates;
    returns the number of non-duplicate (strictly increasing) entries */
 int populte_monotonic_arr_with_dups(int *arr, int size);
+void populte_monotonic_arr_no_dups(int *arr, int size);
 
 #endif /* UTILS_H_ */

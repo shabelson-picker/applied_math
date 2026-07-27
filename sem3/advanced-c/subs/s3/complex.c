@@ -52,7 +52,7 @@ int  get_users_complex(Complex *z)
     {return -1 ;}
     printf("Good Boy / Girl, \nnow");
     ret = set_float(&i,'i');
-    if (ret ==-1){return ;}
+    if (ret ==-1){return -1;}
     z->img = i; z->real=R;
     printf("God Bless your heart\n");
     printf("that's YOUR complex : ");
