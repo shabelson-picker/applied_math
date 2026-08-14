@@ -1,0 +1,13 @@
+{
+    "C_Cpp.default.cStandard": "c11",
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+    "C_Cpp.debugShortcut": true,
+    "cmake.configureOnOpen": false,
+    "makefile.configureOnOpen": false,
+    "debug.allowBreakpointsEverywhere": true,
+    "debug.inlineValues": "on",
+    "debug.showBreakpointsInOverviewRuler": true,
+    "files.associations": {
+        "*.h": "c"
+    }
+}

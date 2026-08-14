@@ -1,0 +1,182 @@
+{
+    "version": "0.2.0",
+    "inputs": [
+        {
+            "id": "exeName",
+            "type": "promptString",
+            "description": "Executable produced by the Makefile (the TARGET name)",
+            "default": "main"
+        }
+    ],
+    "configurations": [
+        {
+            "name": "Debug active file (gcc)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "gcc: build active file (debug)",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set disassembly flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Don't prompt to download debuginfo",
+                    "text": "-gdb-set debuginfod enabled off",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug active file (asan+ubsan)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}.asan",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [
+                {
+                    "name": "ASAN_OPTIONS",
+                    "value": "abort_on_error=1:detect_leaks=1"
+                },
+                {
+                    "name": "UBSAN_OPTIONS",
+                    "value": "print_stacktrace=1"
+                }
+            ],
+            "console": "integratedTerminal",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "gcc: build active file (asan+ubsan)",
+            "setupCommands": [
+                {
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "text": "-gdb-set debuginfod enabled off",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug active folder (all *.c)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/a.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "gcc: build active folder (all *.c)",
+            "setupCommands": [
+                {
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "text": "-gdb-set debuginfod enabled off",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug active folder (all *.c, asan+ubsan)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/a.asan.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [
+                {
+                    "name": "ASAN_OPTIONS",
+                    "value": "abort_on_error=1:detect_leaks=1"
+                },
+                {
+                    "name": "UBSAN_OPTIONS",
+                    "value": "print_stacktrace=1"
+                }
+            ],
+            "console": "integratedTerminal",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "gcc: build active folder (all *.c, asan+ubsan)",
+            "setupCommands": [
+                {
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "text": "-gdb-set debuginfod enabled off",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug active folder (make)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${input:exeName}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "make: build active folder",
+            "setupCommands": [
+                {
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "text": "-gdb-set debuginfod enabled off",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug active folder (cmake)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/build/${input:exeName}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "preLaunchTask": "cmake: configure+build active folder",
+            "setupCommands": [
+                {
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "text": "-gdb-set debuginfod enabled off",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

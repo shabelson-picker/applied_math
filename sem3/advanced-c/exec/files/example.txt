@@ -1,0 +1,4 @@
+this is a text
+the text is good
+this is from from fputs
+this is format : 1 2 3

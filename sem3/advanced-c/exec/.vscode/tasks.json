@@ -1,0 +1,118 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "gcc: build active file (debug)",
+            "type": "cppbuild",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-Wall",
+                "-Wextra",
+                "-std=c11",
+                "-g3",
+                "-O0",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compile the open .c file on its own, with debug info."
+        },
+        {
+            "label": "gcc: build active file (asan+ubsan)",
+            "type": "cppbuild",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-Wall",
+                "-Wextra",
+                "-std=c11",
+                "-g3",
+                "-O0",
+                "-fsanitize=address,undefined",
+                "-fno-omit-frame-pointer",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.asan"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Same, plus AddressSanitizer/UBSan to catch bad memory, leaks and UB at runtime."
+        },
+        {
+            "label": "gcc: build active folder (all *.c)",
+            "type": "shell",
+            "command": "gcc -fdiagnostics-color=always -Wall -Wextra -std=c11 -g3 -O0 *.c -o a.out",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Compile every .c in the open file's folder into ./a.out. Use for multi-file projects with no Makefile."
+        },
+        {
+            "label": "gcc: build active folder (all *.c, asan+ubsan)",
+            "type": "shell",
+            "command": "gcc -fdiagnostics-color=always -Wall -Wextra -std=c11 -g3 -O0 -fsanitize=address,undefined -fno-omit-frame-pointer *.c -o a.asan.out",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "make: build active folder",
+            "type": "shell",
+            "command": "make",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Run `make` in the open file's folder."
+        },
+        {
+            "label": "make: clean active folder",
+            "type": "shell",
+            "command": "make clean",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "cmake: configure+build active folder",
+            "type": "shell",
+            "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "Configure+build the CMake project in the open file's folder into ./build."
+        }
+    ]
+}

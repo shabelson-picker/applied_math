@@ -1,9 +1,10 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -g -MMD -MP
+CFLAGS = -Wall -Wextra -std=c11 -g -MMD -MP -pthread
 
-SRC = nested_lists.c
+SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
-TARGET = nested_lists
+TARGET = main
+
 
 
 all: $(TARGET)
@@ -19,3 +20,4 @@ clean:
 	rm -f $(OBJ) $(TARGET) $(wildcard *.d)
 
 -include $(OBJ:.o=.d)
+
