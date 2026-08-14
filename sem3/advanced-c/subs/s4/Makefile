@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -g -MMD -MP
+CFLAGS = -Wall -Wextra -std=c11 
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
@@ -12,8 +12,8 @@ all: $(TARGET)
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+# %.o: %.c
+# 	$(CC) $(CFLAGS) -c $< -o $@
 
 
 clean:
