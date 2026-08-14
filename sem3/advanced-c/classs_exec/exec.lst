@@ -1,0 +1,249 @@
+
+exec:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+0000000000001000 <_init>:
+    1000:	f3 0f 1e fa          	endbr64
+    1004:	48 83 ec 08          	sub    $0x8,%rsp
+    1008:	48 8b 05 d9 2f 00 00 	mov    0x2fd9(%rip),%rax        # 3fe8 <__gmon_start__@Base>
+    100f:	48 85 c0             	test   %rax,%rax
+    1012:	74 02                	je     1016 <_init+0x16>
+    1014:	ff d0                	call   *%rax
+    1016:	48 83 c4 08          	add    $0x8,%rsp
+    101a:	c3                   	ret
+
+Disassembly of section .plt:
+
+0000000000001020 <.plt>:
+    1020:	ff 35 7a 2f 00 00    	push   0x2f7a(%rip)        # 3fa0 <_GLOBAL_OFFSET_TABLE_+0x8>
+    1026:	ff 25 7c 2f 00 00    	jmp    *0x2f7c(%rip)        # 3fa8 <_GLOBAL_OFFSET_TABLE_+0x10>
+    102c:	0f 1f 40 00          	nopl   0x0(%rax)
+    1030:	f3 0f 1e fa          	endbr64
+    1034:	68 00 00 00 00       	push   $0x0
+    1039:	e9 e2 ff ff ff       	jmp    1020 <_init+0x20>
+    103e:	66 90                	xchg   %ax,%ax
+    1040:	f3 0f 1e fa          	endbr64
+    1044:	68 01 00 00 00       	push   $0x1
+    1049:	e9 d2 ff ff ff       	jmp    1020 <_init+0x20>
+    104e:	66 90                	xchg   %ax,%ax
+    1050:	f3 0f 1e fa          	endbr64
+    1054:	68 02 00 00 00       	push   $0x2
+    1059:	e9 c2 ff ff ff       	jmp    1020 <_init+0x20>
+    105e:	66 90                	xchg   %ax,%ax
+    1060:	f3 0f 1e fa          	endbr64
+    1064:	68 03 00 00 00       	push   $0x3
+    1069:	e9 b2 ff ff ff       	jmp    1020 <_init+0x20>
+    106e:	66 90                	xchg   %ax,%ax
+    1070:	f3 0f 1e fa          	endbr64
+    1074:	68 04 00 00 00       	push   $0x4
+    1079:	e9 a2 ff ff ff       	jmp    1020 <_init+0x20>
+    107e:	66 90                	xchg   %ax,%ax
+
+Disassembly of section .plt.got:
+
+0000000000001080 <__cxa_finalize@plt>:
+    1080:	f3 0f 1e fa          	endbr64
+    1084:	ff 25 6e 2f 00 00    	jmp    *0x2f6e(%rip)        # 3ff8 <__cxa_finalize@GLIBC_2.2.5>
+    108a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+Disassembly of section .plt.sec:
+
+0000000000001090 <puts@plt>:
+    1090:	f3 0f 1e fa          	endbr64
+    1094:	ff 25 16 2f 00 00    	jmp    *0x2f16(%rip)        # 3fb0 <puts@GLIBC_2.2.5>
+    109a:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000000010a0 <strlen@plt>:
+    10a0:	f3 0f 1e fa          	endbr64
+    10a4:	ff 25 0e 2f 00 00    	jmp    *0x2f0e(%rip)        # 3fb8 <strlen@GLIBC_2.2.5>
+    10aa:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000000010b0 <__stack_chk_fail@plt>:
+    10b0:	f3 0f 1e fa          	endbr64
+    10b4:	ff 25 06 2f 00 00    	jmp    *0x2f06(%rip)        # 3fc0 <__stack_chk_fail@GLIBC_2.4>
+    10ba:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000000010c0 <printf@plt>:
+    10c0:	f3 0f 1e fa          	endbr64
+    10c4:	ff 25 fe 2e 00 00    	jmp    *0x2efe(%rip)        # 3fc8 <printf@GLIBC_2.2.5>
+    10ca:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+00000000000010d0 <fgets@plt>:
+    10d0:	f3 0f 1e fa          	endbr64
+    10d4:	ff 25 f6 2e 00 00    	jmp    *0x2ef6(%rip)        # 3fd0 <fgets@GLIBC_2.2.5>
+    10da:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+
+Disassembly of section .text:
+
+00000000000010e0 <_start>:
+    10e0:	f3 0f 1e fa          	endbr64
+    10e4:	31 ed                	xor    %ebp,%ebp
+    10e6:	49 89 d1             	mov    %rdx,%r9
+    10e9:	5e                   	pop    %rsi
+    10ea:	48 89 e2             	mov    %rsp,%rdx
+    10ed:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+    10f1:	50                   	push   %rax
+    10f2:	54                   	push   %rsp
+    10f3:	45 31 c0             	xor    %r8d,%r8d
+    10f6:	31 c9                	xor    %ecx,%ecx
+    10f8:	48 8d 3d ca 00 00 00 	lea    0xca(%rip),%rdi        # 11c9 <main>
+    10ff:	ff 15 d3 2e 00 00    	call   *0x2ed3(%rip)        # 3fd8 <__libc_start_main@GLIBC_2.34>
+    1105:	f4                   	hlt
+    1106:	66 2e 0f 1f 84 00 00 	cs nopw 0x0(%rax,%rax,1)
+    110d:	00 00 00 
+
+0000000000001110 <deregister_tm_clones>:
+    1110:	48 8d 3d f9 2e 00 00 	lea    0x2ef9(%rip),%rdi        # 4010 <stdin@GLIBC_2.2.5>
+    1117:	48 8d 05 f2 2e 00 00 	lea    0x2ef2(%rip),%rax        # 4010 <stdin@GLIBC_2.2.5>
+    111e:	48 39 f8             	cmp    %rdi,%rax
+    1121:	74 15                	je     1138 <deregister_tm_clones+0x28>
+    1123:	48 8b 05 b6 2e 00 00 	mov    0x2eb6(%rip),%rax        # 3fe0 <_ITM_deregisterTMCloneTable@Base>
+    112a:	48 85 c0             	test   %rax,%rax
+    112d:	74 09                	je     1138 <deregister_tm_clones+0x28>
+    112f:	ff e0                	jmp    *%rax
+    1131:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+    1138:	c3                   	ret
+    1139:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000001140 <register_tm_clones>:
+    1140:	48 8d 3d c9 2e 00 00 	lea    0x2ec9(%rip),%rdi        # 4010 <stdin@GLIBC_2.2.5>
+    1147:	48 8d 35 c2 2e 00 00 	lea    0x2ec2(%rip),%rsi        # 4010 <stdin@GLIBC_2.2.5>
+    114e:	48 29 fe             	sub    %rdi,%rsi
+    1151:	48 89 f0             	mov    %rsi,%rax
+    1154:	48 c1 ee 3f          	shr    $0x3f,%rsi
+    1158:	48 c1 f8 03          	sar    $0x3,%rax
+    115c:	48 01 c6             	add    %rax,%rsi
+    115f:	48 d1 fe             	sar    $1,%rsi
+    1162:	74 14                	je     1178 <register_tm_clones+0x38>
+    1164:	48 8b 05 85 2e 00 00 	mov    0x2e85(%rip),%rax        # 3ff0 <_ITM_registerTMCloneTable@Base>
+    116b:	48 85 c0             	test   %rax,%rax
+    116e:	74 08                	je     1178 <register_tm_clones+0x38>
+    1170:	ff e0                	jmp    *%rax
+    1172:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+    1178:	c3                   	ret
+    1179:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+0000000000001180 <__do_global_dtors_aux>:
+    1180:	f3 0f 1e fa          	endbr64
+    1184:	80 3d 8d 2e 00 00 00 	cmpb   $0x0,0x2e8d(%rip)        # 4018 <completed.0>
+    118b:	75 2b                	jne    11b8 <__do_global_dtors_aux+0x38>
+    118d:	55                   	push   %rbp
+    118e:	48 83 3d 62 2e 00 00 	cmpq   $0x0,0x2e62(%rip)        # 3ff8 <__cxa_finalize@GLIBC_2.2.5>
+    1195:	00 
+    1196:	48 89 e5             	mov    %rsp,%rbp
+    1199:	74 0c                	je     11a7 <__do_global_dtors_aux+0x27>
+    119b:	48 8b 3d 66 2e 00 00 	mov    0x2e66(%rip),%rdi        # 4008 <__dso_handle>
+    11a2:	e8 d9 fe ff ff       	call   1080 <__cxa_finalize@plt>
+    11a7:	e8 64 ff ff ff       	call   1110 <deregister_tm_clones>
+    11ac:	c6 05 65 2e 00 00 01 	movb   $0x1,0x2e65(%rip)        # 4018 <completed.0>
+    11b3:	5d                   	pop    %rbp
+    11b4:	c3                   	ret
+    11b5:	0f 1f 00             	nopl   (%rax)
+    11b8:	c3                   	ret
+    11b9:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+
+00000000000011c0 <frame_dummy>:
+    11c0:	f3 0f 1e fa          	endbr64
+    11c4:	e9 77 ff ff ff       	jmp    1140 <register_tm_clones>
+
+00000000000011c9 <main>:
+    11c9:	f3 0f 1e fa          	endbr64
+    11cd:	55                   	push   %rbp
+    11ce:	48 89 e5             	mov    %rsp,%rbp
+    11d1:	53                   	push   %rbx
+    11d2:	48 83 ec 28          	sub    $0x28,%rsp
+    11d6:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+    11dd:	00 00 
+    11df:	48 89 45 e8          	mov    %rax,-0x18(%rbp)
+    11e3:	31 c0                	xor    %eax,%eax
+    11e5:	66 c7 45 e0 00 00    	movw   $0x0,-0x20(%rbp)
+    11eb:	c6 45 e2 00          	movb   $0x0,-0x1e(%rbp)
+    11ef:	c7 45 e3 00 00 00 00 	movl   $0x0,-0x1d(%rbp)
+    11f6:	c6 45 e7 00          	movb   $0x0,-0x19(%rbp)
+    11fa:	48 8d 45 e3          	lea    -0x1d(%rbp),%rax
+    11fe:	48 89 c7             	mov    %rax,%rdi
+    1201:	e8 9a fe ff ff       	call   10a0 <strlen@plt>
+    1206:	48 89 c3             	mov    %rax,%rbx
+    1209:	48 8d 45 e0          	lea    -0x20(%rbp),%rax
+    120d:	48 89 c7             	mov    %rax,%rdi
+    1210:	e8 8b fe ff ff       	call   10a0 <strlen@plt>
+    1215:	48 89 da             	mov    %rbx,%rdx
+    1218:	48 89 c6             	mov    %rax,%rsi
+    121b:	48 8d 05 e2 0d 00 00 	lea    0xde2(%rip),%rax        # 2004 <_IO_stdin_used+0x4>
+    1222:	48 89 c7             	mov    %rax,%rdi
+    1225:	b8 00 00 00 00       	mov    $0x0,%eax
+    122a:	e8 91 fe ff ff       	call   10c0 <printf@plt>
+    122f:	48 8b 15 da 2d 00 00 	mov    0x2dda(%rip),%rdx        # 4010 <stdin@GLIBC_2.2.5>
+    1236:	48 8d 45 e0          	lea    -0x20(%rbp),%rax
+    123a:	be 03 00 00 00       	mov    $0x3,%esi
+    123f:	48 89 c7             	mov    %rax,%rdi
+    1242:	e8 89 fe ff ff       	call   10d0 <fgets@plt>
+    1247:	48 8d 45 e0          	lea    -0x20(%rbp),%rax
+    124b:	48 89 c6             	mov    %rax,%rsi
+    124e:	48 8d 05 ca 0d 00 00 	lea    0xdca(%rip),%rax        # 201f <_IO_stdin_used+0x1f>
+    1255:	48 89 c7             	mov    %rax,%rdi
+    1258:	b8 00 00 00 00       	mov    $0x0,%eax
+    125d:	e8 5e fe ff ff       	call   10c0 <printf@plt>
+    1262:	48 8b 15 a7 2d 00 00 	mov    0x2da7(%rip),%rdx        # 4010 <stdin@GLIBC_2.2.5>
+    1269:	48 8d 45 e3          	lea    -0x1d(%rbp),%rax
+    126d:	be 05 00 00 00       	mov    $0x5,%esi
+    1272:	48 89 c7             	mov    %rax,%rdi
+    1275:	e8 56 fe ff ff       	call   10d0 <fgets@plt>
+    127a:	48 8d 45 e3          	lea    -0x1d(%rbp),%rax
+    127e:	48 89 c6             	mov    %rax,%rsi
+    1281:	48 8d 05 a0 0d 00 00 	lea    0xda0(%rip),%rax        # 2028 <_IO_stdin_used+0x28>
+    1288:	48 89 c7             	mov    %rax,%rdi
+    128b:	b8 00 00 00 00       	mov    $0x0,%eax
+    1290:	e8 2b fe ff ff       	call   10c0 <printf@plt>
+    1295:	c7 45 d8 00 00 00 00 	movl   $0x0,-0x28(%rbp)
+    129c:	eb 27                	jmp    12c5 <main+0xfc>
+    129e:	8b 45 d8             	mov    -0x28(%rbp),%eax
+    12a1:	48 98                	cltq
+    12a3:	0f b6 44 05 e0       	movzbl -0x20(%rbp,%rax,1),%eax
+    12a8:	0f be c0             	movsbl %al,%eax
+    12ab:	89 c6                	mov    %eax,%esi
+    12ad:	48 8d 05 7d 0d 00 00 	lea    0xd7d(%rip),%rax        # 2031 <_IO_stdin_used+0x31>
+    12b4:	48 89 c7             	mov    %rax,%rdi
+    12b7:	b8 00 00 00 00       	mov    $0x0,%eax
+    12bc:	e8 ff fd ff ff       	call   10c0 <printf@plt>
+    12c1:	83 45 d8 01          	addl   $0x1,-0x28(%rbp)
+    12c5:	8b 45 d8             	mov    -0x28(%rbp),%eax
+    12c8:	83 f8 02             	cmp    $0x2,%eax
+    12cb:	76 d1                	jbe    129e <main+0xd5>
+    12cd:	48 8d 05 63 0d 00 00 	lea    0xd63(%rip),%rax        # 2037 <_IO_stdin_used+0x37>
+    12d4:	48 89 c7             	mov    %rax,%rdi
+    12d7:	e8 b4 fd ff ff       	call   1090 <puts@plt>
+    12dc:	c7 45 dc 00 00 00 00 	movl   $0x0,-0x24(%rbp)
+    12e3:	eb 27                	jmp    130c <main+0x143>
+    12e5:	8b 45 dc             	mov    -0x24(%rbp),%eax
+    12e8:	48 98                	cltq
+    12ea:	0f b6 44 05 e3       	movzbl -0x1d(%rbp,%rax,1),%eax
+    12ef:	0f be c0             	movsbl %al,%eax
+    12f2:	89 c6                	mov    %eax,%esi
+    12f4:	48 8d 05 36 0d 00 00 	lea    0xd36(%rip),%rax        # 2031 <_IO_stdin_used+0x31>
+    12fb:	48 89 c7             	mov    %rax,%rdi
+    12fe:	b8 00 00 00 00       	mov    $0x0,%eax
+    1303:	e8 b8 fd ff ff       	call   10c0 <printf@plt>
+    1308:	83 45 dc 01          	addl   $0x1,-0x24(%rbp)
+    130c:	8b 45 dc             	mov    -0x24(%rbp),%eax
+    130f:	83 f8 04             	cmp    $0x4,%eax
+    1312:	76 d1                	jbe    12e5 <main+0x11c>
+    1314:	b8 00 00 00 00       	mov    $0x0,%eax
+    1319:	48 8b 55 e8          	mov    -0x18(%rbp),%rdx
+    131d:	64 48 2b 14 25 28 00 	sub    %fs:0x28,%rdx
+    1324:	00 00 
+    1326:	74 05                	je     132d <main+0x164>
+    1328:	e8 83 fd ff ff       	call   10b0 <__stack_chk_fail@plt>
+    132d:	48 8b 5d f8          	mov    -0x8(%rbp),%rbx
+    1331:	c9                   	leave
+    1332:	c3                   	ret
+
+Disassembly of section .fini:
+
+0000000000001334 <_fini>:
+    1334:	f3 0f 1e fa          	endbr64
+    1338:	48 83 ec 08          	sub    $0x8,%rsp
+    133c:	48 83 c4 08          	add    $0x8,%rsp
+    1340:	c3                   	ret

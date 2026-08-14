@@ -3,33 +3,33 @@
 
 #define N 10
 
-typedef struct node
+typedef struct Node
 {
     int data;
-    struct node *next;
-} node;
+    struct Node *next;
+} Node;
 
 typedef struct list
 {
-    node *head;
-    node *tail;
+    Node *head;
+    Node *tail;
 
 } list;
 
-node *create_node(int data, node *next)
+Node *create_node(int data, Node *next)
 {
-    node *item = (node *)malloc(sizeof(node));
+    Node *item = (Node *)malloc(sizeof(Node));
     item->data = data;
     item->next = next;
     return item;
 }
 
-node *createListFromArray(int *arr, int n)
+Node *createListFromArray(int *arr, int n)
 {
 
     // odd in the end, even at the start
-    node *head = NULL;
-    node *tail = NULL;
+    Node *head = NULL;
+    Node *tail = NULL;
     if (n == 0)
         return NULL;
     head = tail = create_node(arr[0], NULL);
@@ -74,7 +74,7 @@ list createListFromArray2(int *arr, int n)
     return lst;
 }
 
-void printList(node *head)
+void printList(Node *head)
 {
 
     while (head != NULL)
@@ -96,28 +96,28 @@ void printList2(list lst)
 }
 
 
-void append_to_head_by_ref(int data,node** prev_head)
+void append_to_head_by_ref(int data,Node** prev_head)
 {
-    node *new_head = (node*) malloc(sizeof(node));
+    Node *new_head = (Node*) malloc(sizeof(Node));
     new_head->next = (*prev_head);
     new_head->data = data;
     *prev_head = new_head;
     
 }
 
-node* append_to_head_by_val(int data,node* prev_head)
+Node* append_to_head_by_val(int data,Node* prev_head)
 {
-    node *new_head = (node*) malloc(sizeof(node));
+    Node *new_head = (Node*) malloc(sizeof(Node));
     new_head->next = prev_head;
     new_head->data = data;
     return new_head;
 }
 
-int delete_head(node **head)
+int delete_head(Node **head)
 {
 if ((*head)==NULL) return 0;
 
-node* temp = (*head);
+Node* temp = (*head);
 *head =(*head)->next;
 printf("del %i\n",temp->data);
 free (temp);
@@ -129,7 +129,7 @@ return 1;
 int main()
 {
     int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    node *head = createListFromArray(arr, N);
+    Node *head = createListFromArray(arr, N);
     printList(head);
     list lst = createListFromArray2(arr,N);
     printList2(lst);

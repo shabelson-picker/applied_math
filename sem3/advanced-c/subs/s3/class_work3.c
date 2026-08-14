@@ -74,6 +74,7 @@ void q3()
             printf("----------");
         }
     }
+    free(all_flats);
    
 }
 
