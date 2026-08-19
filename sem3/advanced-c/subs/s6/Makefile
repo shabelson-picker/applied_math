@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -g
 
-SRC = class_work2.c utils.c
+SRC = list3d.c
 OBJ = $(SRC:.c=.o)
 TARGET = class_work2
 
@@ -15,7 +15,7 @@ $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # class_work1.c does #include "utils.c", so rebuild when utils.c changes
-class_work2.o: class_work2.c utils.c
+list3d.c: list3d.c
 
 clean:
 	rm -f $(OBJ) $(TARGET)

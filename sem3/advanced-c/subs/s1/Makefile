@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11
+CFLAGS = -Wall -Wextra -std=c11 -g -MMD -MP
 
 SRC = class_work1.c
 OBJ = $(SRC:.c=.o)

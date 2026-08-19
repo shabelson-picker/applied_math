@@ -2,3 +2,4 @@
 - [Infi 2 test prep](infi2-test-prep.md) — ongoing, working through solution PDFs question by question; up to List 11
 - [No LaTeX](no-latex-explanations.md) — explain math in plain text, never LaTeX
 - [Hebrew math terms](hebrew-math-terms-infi2.md) — glossary for the Infi 2 worksheets
+- [VS Code C debug](vscode-c-debug-cpptools-bug.md) — cpptools 1.32.x freezes gdb here; pinned to 1.29.3, don't re-debug launch.json

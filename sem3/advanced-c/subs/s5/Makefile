@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -std=c11 -g -MMD -MP
 
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
-TARGET = class_work4
+TARGET = class_work5
 
 
 
